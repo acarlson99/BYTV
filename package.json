@@ -1,0 +1,23 @@
+{
+	"name": "better-ytv",
+	"version": "1.0.0",
+	"description": "better youtube",
+	"main": "content.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/acarlson99/BYTV.git"
+	},
+	"keywords": [
+		"youtube",
+		"better-ttv",
+		"FrankerFaceZ"
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/acarlson99/BYTV/issues"
+	},
+	"homepage": "https://github.com/acarlson99/BYTV#readme"
+}
