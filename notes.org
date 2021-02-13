@@ -1,0 +1,48 @@
+* NOTES
+  - Notes are in the emacs [[https://orgmode.org/][org mode]] format
+  - C-c C-c checks/unchecks boxes. [[https://orgmode.org/manual/Checkboxes.html][Details]]
+  - [[https://portswigger.net/burp/communitydownload][burp suite]] is very useful. [[https://portswigger.net/burp/documentation/desktop/getting-started][Getting started]]
+* TODO [0/3]
+  - [-] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [1/3]
+    - [X] Use Burp Suite to find BTTV endpoints
+    - [ ] Figure out how to query BTTV for emotes
+	- [ ] Figure out what socket endpoint is used for
+  - [ ] Figure out YouTube backend and messages sent from server to frontend
+  - [ ] Features (from BTTV extension pages) [0/4]
+    - [ ] Extra emoticons - BetterTTV global and per-channel emotes [0/2]
+      - [ ] Intercept messages from server
+      - [ ] Check message for keywords, query BTTV API for corresponding emote
+    - [ ] Username/Word/Phrase highlighting [0/2]
+      Given a list of words/phrases, highlight instances
+      - [ ] Live chat
+      - [ ] Comment section
+    - [ ] Word/Phrase blacklist [0/2]
+      If message contains `word/phrase` then don't display it
+      - [ ] Live chat
+      - [ ] Comment section
+    - [ ] See deleted links and messages [0/2]
+      If live chat message is deleted then grey out msg (or smth) instead of deleting it from chat history
+      - [ ] Intercept `delmsg` from server
+      - [ ] Modify chat message instead of deleting it entirely
+* Endpoints
+  - https://api.betterttv.net
+	- emotes
+	  - /3/cached/emotes/global
+		- BTTV global emotes
+	  - /3/cached/users/twitch/{twitchID}
+		- Queries for user's enabled BTTV emotes
+		- https://api.betterttv.net/3/cached/users/twitch/71092938 returns BTTV emotes enabled by xqcow
+	  - /3/cached/frankerfacez/emotes/global
+		- FFZ global emotes
+	  - /3/cached/frankerfacez/users/twitch/{twitchID}
+		- Queries for user's enabled FFZ emotes
+		- https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938 returns FFZ emotes enabled by xqcow
+	- other
+	  - /3/cached/badges
+	  - /3/cached/changelog
+  - https://sockets.betterttv.net
+	- /ws
+	  Create socket connection. Not sure what it does
+  - https://cdn.betterttv.net/privacy.html
+	Can be safely ignored
+	- /privacy.html
