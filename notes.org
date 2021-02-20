@@ -6,7 +6,7 @@
   - [-] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [1/3]
     - [X] Use Burp Suite to find BTTV endpoints
     - [ ] Figure out how to query BTTV for emotes
-	- [ ] Figure out what socket endpoint is used for
+    - [ ] Figure out what socket endpoint is used for
   - [ ] Figure out YouTube backend and messages sent from server to frontend
   - [ ] Features (from BTTV extension pages) [0/4]
     - [ ] Extra emoticons - BetterTTV global and per-channel emotes [0/2]
@@ -26,23 +26,23 @@
       - [ ] Modify chat message instead of deleting it entirely
 * Endpoints
   - https://api.betterttv.net
-	- emotes
-	  - /3/cached/emotes/global
-		- BTTV global emotes
-	  - /3/cached/users/twitch/{twitchID}
-		- Queries for user's enabled BTTV emotes
-		- https://api.betterttv.net/3/cached/users/twitch/71092938 returns BTTV emotes enabled by xqcow
-	  - /3/cached/frankerfacez/emotes/global
-		- FFZ global emotes
-	  - /3/cached/frankerfacez/users/twitch/{twitchID}
-		- Queries for user's enabled FFZ emotes
-		- https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938 returns FFZ emotes enabled by xqcow
-	- other
-	  - /3/cached/badges
-	  - /3/cached/changelog
+    - emotes
+      - /3/cached/emotes/global
+        - BTTV global emotes
+      - /3/cached/users/twitch/{twitchID}
+        - Queries for user's enabled BTTV emotes
+        - https://api.betterttv.net/3/cached/users/twitch/71092938 returns BTTV emotes enabled by xqcow
+      - /3/cached/frankerfacez/emotes/global
+        - FFZ global emotes
+      - /3/cached/frankerfacez/users/twitch/{twitchID}
+        - Queries for user's enabled FFZ emotes
+        - https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938 returns FFZ emotes enabled by xqcow
+    - other
+      - /3/cached/badges
+      - /3/cached/changelog
   - https://sockets.betterttv.net
-	- /ws
-	  Create socket connection. Not sure what it does
+    - /ws
+      Create socket connection. Not sure what it does
   - https://cdn.betterttv.net/privacy.html
-	Can be safely ignored
-	- /privacy.html
+    Can be safely ignored
+    - /privacy.html
