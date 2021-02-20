@@ -60,14 +60,6 @@
   - /assets/logos/settings_logo.png
   - /assets/logos/mascot.png
 ** Example
-   :PROPERTIES:
-   :ORDERED:  t
-   :END:
-   :LOGBOOK:
-   CLOCK: [2021-02-20 Sat 13:05]--[2021-02-20 Sat 13:07] =>  0:02
-   CLOCK: [2021-02-20 Sat 13:04]--[2021-02-20 Sat 13:05] =>  0:01
-   CLOCK: [2021-02-20 Sat 13:04]--[2021-02-20 Sat 13:04] =>  0:00
-   :END:
    ```
    # FFZ
    $ curl https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938
