@@ -2,10 +2,11 @@
   - Notes are in the emacs [[https://orgmode.org/][org mode]] format
   - C-c C-c checks/unchecks boxes. [[https://orgmode.org/manual/Checkboxes.html][Details]]
   - [[https://portswigger.net/burp/communitydownload][burp suite]] is very useful. [[https://portswigger.net/burp/documentation/desktop/getting-started][Getting started]]
+  - [[https://medium.com/dev-genius/how-to-make-a-chrome-extension-f37bdfb6edb3][this]] blog post is probably useful
 * TODO [0/3]
-  - [-] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [1/3]
+  - [-] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [2/3]
     - [X] Use Burp Suite to find BTTV endpoints
-    - [ ] Figure out how to query BTTV for emotes
+    - [X] Figure out how to query BTTV for emotes
     - [ ] Figure out what socket endpoint is used for
   - [ ] Figure out YouTube backend and messages sent from server to frontend
   - [ ] Features (from BTTV extension pages) [0/4]
@@ -25,24 +26,111 @@
       - [ ] Intercept `delmsg` from server
       - [ ] Modify chat message instead of deleting it entirely
 * Endpoints
-  - https://api.betterttv.net
-    - emotes
-      - /3/cached/emotes/global
-        - BTTV global emotes
-      - /3/cached/users/twitch/{twitchID}
-        - Queries for user's enabled BTTV emotes
-        - https://api.betterttv.net/3/cached/users/twitch/71092938 returns BTTV emotes enabled by xqcow
-      - /3/cached/frankerfacez/emotes/global
-        - FFZ global emotes
-      - /3/cached/frankerfacez/users/twitch/{twitchID}
-        - Queries for user's enabled FFZ emotes
-        - https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938 returns FFZ emotes enabled by xqcow
+** Documentation
+*** https://api.betterttv.net
+  - emotes
+    NOTE: for info on querying emote image data see [[*https://cdn.betterttv.net][here]]
+    - /3/cached/emotes/global
+      - BTTV global emotes
+    - /3/cached/users/twitch/{twitchID}
+      - Queries for user's enabled BTTV emotes
+      - https://api.betterttv.net/3/cached/users/twitch/71092938 returns BTTV emotes enabled by xqcow
+    - /3/cached/frankerfacez/emotes/global
+      - FFZ global emotes
+    - /3/cached/frankerfacez/users/twitch/{twitchID}
+      - Queries for user's enabled FFZ emotes
+      - https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938 returns FFZ emotes enabled by xqcow
     - other
       - /3/cached/badges
       - /3/cached/changelog
-  - https://sockets.betterttv.net
-    - /ws
-      Create socket connection. Not sure what it does
-  - https://cdn.betterttv.net/privacy.html
-    Can be safely ignored
-    - /privacy.html
+*** https://sockets.betterttv.net
+  - /ws
+    Create socket connection. Not sure what it does
+*** https://cdn.betterttv.net
+  - /emote/{ID}/{size}
+    - emote PNG/JPG/GIF
+    - `ID` from api.betterttv endpoint, like https://api.betterttv.net/3/cached/emotes/global
+    - `size` can be (i think) one of: 1x, 2x, 3x
+  - /frankerfacez_emote/{ID}/{size}
+    - emote PNG/JPG/GIF
+    - `ID` from api.betterttv/3/cached/frankerfacez/ endpoint, like https://api.betterttv.net/3/cached/frankerfacez/emotes/global
+    - `size` can be any of the sizes listed in "images" field of emote JSON info -- e.g. https://cdn.betterttv.net/frankerfacez_emote/421124/1
+  - /privacy.html
+  - /assets/logos/logo_icon.png
+  - /assets/logos/settings_logo.png
+  - /assets/logos/mascot.png
+** Example
+   :PROPERTIES:
+   :ORDERED:  t
+   :END:
+   :LOGBOOK:
+   CLOCK: [2021-02-20 Sat 13:05]--[2021-02-20 Sat 13:07] =>  0:02
+   CLOCK: [2021-02-20 Sat 13:04]--[2021-02-20 Sat 13:05] =>  0:01
+   CLOCK: [2021-02-20 Sat 13:04]--[2021-02-20 Sat 13:04] =>  0:00
+   :END:
+   ```
+   # FFZ
+   $ curl https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938
+   [
+   ...
+   {
+   "id": 421124,
+   "user": {
+   "id": 243610,
+   "name": "sundizzle",
+   "displayName": "sundizzle"
+   },
+   "code": "WeirdChamp",
+   "images": {
+   "1x": "https://cdn.betterttv.net/frankerfacez_emote/421124/1",
+   "2x": "https://cdn.betterttv.net/frankerfacez_emote/421124/2",
+   "4x": "https://cdn.betterttv.net/frankerfacez_emote/421124/4"
+   },
+   "imageType": "png"
+   },
+   ...
+   ]
+   $ curl https://cdn.betterttv.net/frankerfacez_emote/421124/1 --output weridchamp.png
+
+   # BTTV
+   $ curl https://api.betterttv.net/3/cached/users/twitch/71092938
+   {
+   "id": "5717c985b017b9d058fad265",
+   "bots": [
+   "xqcbot"
+   ],
+   "channelEmotes": [
+   {
+   "id": "58661a9573f26556fc930080",
+   "code": "FeelsRectangleMan",
+   "imageType": "png",
+   "userId": "5717c985b017b9d058fad265"
+   },
+   ...
+   {
+   "id": "58ae8407ff7b7276f8e594f2",
+   "code": "POGGERS",
+   "imageType": "png",
+   "user": {
+   "id": "57ea01a4665bcff56f0b64da",
+   "name": "to_ot",
+   "displayName": "tO_Ot",
+   "providerId": "133315887"
+   }
+   },
+   ....
+   {
+   "id": "602ad7b782b7c45eb1c94e23",
+   "code": "xqcFinger",
+   "imageType": "gif",
+   "user": {
+   "id": "5bf965a47e7a9a1e9aae7dd3",
+   "name": "roaringiron",
+   "displayName": "RoaringIron",
+   "providerId": "72388133"
+   }
+   }
+   ]
+   }
+   $ curl https://cdn.betterttv.net/emote/58ae8407ff7b7276f8e594f2/1x --output poggers.png
+   ```
