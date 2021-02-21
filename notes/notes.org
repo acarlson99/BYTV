@@ -5,8 +5,8 @@
   - [[https://medium.com/dev-genius/how-to-make-a-chrome-extension-f37bdfb6edb3][this]] blog post is probably useful
 * TODO [0/3]
   - [-] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [2/3]
-    - [X] Use Burp Suite to find BTTV endpoints
-    - [X] Figure out how to query BTTV for emotes
+    - [X] Use Burp Suite to find BTTV endpoints. [[*Documentation][here]]
+    - [X] Figure out how to query BTTV for emotes. [[*https://cdn.betterttv.net][here]]
     - [ ] Figure out what socket endpoint is used for
   - [ ] Figure out YouTube backend and messages sent from server to frontend
   - [ ] Features (from BTTV extension pages) [0/4]
@@ -32,14 +32,18 @@
     NOTE: for info on querying emote image data see [[*https://cdn.betterttv.net][here]]
     - /3/cached/emotes/global
       - BTTV global emotes
+	  - [[file:bttv-global.json][example]]
     - /3/cached/users/twitch/{twitchID}
       - Queries for user's enabled BTTV emotes
       - https://api.betterttv.net/3/cached/users/twitch/71092938 returns BTTV emotes enabled by xqcow
+	  - [[file:bttv-xqc.json][example]]
     - /3/cached/frankerfacez/emotes/global
       - FFZ global emotes
+      - [[file:ffz-global.json][example]]
     - /3/cached/frankerfacez/users/twitch/{twitchID}
       - Queries for user's enabled FFZ emotes
       - https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938 returns FFZ emotes enabled by xqcow
+	  - [[file:ffz-xqc.json][example]]
     - other
       - /3/cached/badges
       - /3/cached/changelog
@@ -59,70 +63,49 @@
   - /assets/logos/logo_icon.png
   - /assets/logos/settings_logo.png
   - /assets/logos/mascot.png
-** Example
-   ```
-   # FFZ
-   $ curl https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938
-   [
-   ...
-   {
-   "id": 421124,
-   "user": {
-   "id": 243610,
-   "name": "sundizzle",
-   "displayName": "sundizzle"
-   },
-   "code": "WeirdChamp",
-   "images": {
-   "1x": "https://cdn.betterttv.net/frankerfacez_emote/421124/1",
-   "2x": "https://cdn.betterttv.net/frankerfacez_emote/421124/2",
-   "4x": "https://cdn.betterttv.net/frankerfacez_emote/421124/4"
-   },
-   "imageType": "png"
-   },
-   ...
-   ]
-   $ curl https://cdn.betterttv.net/frankerfacez_emote/421124/1 --output weridchamp.png
+** Examples
+*** BTTV
+#+begin_src shell :results file :file bttv-global.json
+curl https://api.betterttv.net/3/cached/emotes/global | jq
+#+end_src
 
-   # BTTV
-   $ curl https://api.betterttv.net/3/cached/users/twitch/71092938
-   {
-   "id": "5717c985b017b9d058fad265",
-   "bots": [
-   "xqcbot"
-   ],
-   "channelEmotes": [
-   {
-   "id": "58661a9573f26556fc930080",
-   "code": "FeelsRectangleMan",
-   "imageType": "png",
-   "userId": "5717c985b017b9d058fad265"
-   },
-   ...
-   {
-   "id": "58ae8407ff7b7276f8e594f2",
-   "code": "POGGERS",
-   "imageType": "png",
-   "user": {
-   "id": "57ea01a4665bcff56f0b64da",
-   "name": "to_ot",
-   "displayName": "tO_Ot",
-   "providerId": "133315887"
-   }
-   },
-   ....
-   {
-   "id": "602ad7b782b7c45eb1c94e23",
-   "code": "xqcFinger",
-   "imageType": "gif",
-   "user": {
-   "id": "5bf965a47e7a9a1e9aae7dd3",
-   "name": "roaringiron",
-   "displayName": "RoaringIron",
-   "providerId": "72388133"
-   }
-   }
-   ]
-   }
-   $ curl https://cdn.betterttv.net/emote/58ae8407ff7b7276f8e594f2/1x --output poggers.png
-   ```
+#+RESULTS:
+[[file:bttv-global.json]]
+
+#+begin_src shell :results file :file bttv-xqc.json
+curl https://api.betterttv.net/3/cached/users/twitch/71092938 | jq
+#+end_src
+
+#+RESULTS:
+[[file:bttv-xqc.json]]
+
+#+begin_src shell :results file graphics :file bttv-emote.png
+# retreive BTTV POGGERS emote
+curl https://cdn.betterttv.net/emote/`grep 'id' bttv-global.json | awk -F'"' '{print $4}' | head -n1`/1x
+#+end_src
+
+#+RESULTS:
+[[file:bttv-emote.png]]
+
+*** FFZ
+#+begin_src shell :results file :file ffz-global.json
+curl https://api.betterttv.net/3/cached/frankerfacez/emotes/global | jq
+#+end_src
+
+#+RESULTS:
+[[file:ffz-global.json]]
+
+#+begin_src shell :results file :file ffz-xqc.json
+curl https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938 | jq
+#+end_src
+
+#+RESULTS:
+[[file:ffz-xqc.json]]
+
+#+begin_src shell :results file graphics :file ffz-emote.png
+# FFZ weirdchamp emote
+curl https://cdn.betterttv.net/frankerfacez_emote/`grep id ffz-global.json | awk '{print $2}' | tr -d , | head -n1`/1
+#+end_src
+
+#+RESULTS:
+[[file:ffz-emote.png]]

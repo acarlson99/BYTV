@@ -1,0 +1,167 @@
+[
+  {
+    "id": 9,
+    "user": {
+      "id": 2,
+      "name": "dansalvato",
+      "displayName": "dansalvato"
+    },
+    "code": "ZrehplaR",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/9/1",
+      "2x": null,
+      "4x": null
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 6,
+    "user": {
+      "id": 2,
+      "name": "dansalvato",
+      "displayName": "dansalvato"
+    },
+    "code": "YooHoo",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/6/1",
+      "2x": null,
+      "4x": null
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 5,
+    "user": {
+      "id": 2,
+      "name": "dansalvato",
+      "displayName": "dansalvato"
+    },
+    "code": "YellowFever",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/5/1",
+      "2x": null,
+      "4x": null
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 4,
+    "user": {
+      "id": 2,
+      "name": "dansalvato",
+      "displayName": "dansalvato"
+    },
+    "code": "ManChicken",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/4/1",
+      "2x": null,
+      "4x": null
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 3,
+    "user": {
+      "id": 2,
+      "name": "dansalvato",
+      "displayName": "dansalvato"
+    },
+    "code": "BeanieHipster",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/3/1",
+      "2x": null,
+      "4x": null
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 25927,
+    "user": {
+      "id": 3,
+      "name": "wolsk",
+      "displayName": "Wolsk"
+    },
+    "code": "CatBag",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/25927/1",
+      "2x": "https://cdn.betterttv.net/frankerfacez_emote/25927/2",
+      "4x": "https://cdn.betterttv.net/frankerfacez_emote/25927/4"
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 27081,
+    "user": {
+      "id": 1,
+      "name": "sirstendec",
+      "displayName": "SirStendec"
+    },
+    "code": "ZreknarF",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/27081/1",
+      "2x": "https://cdn.betterttv.net/frankerfacez_emote/27081/2",
+      "4x": "https://cdn.betterttv.net/frankerfacez_emote/27081/4"
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 28136,
+    "user": {
+      "id": 1,
+      "name": "sirstendec",
+      "displayName": "SirStendec"
+    },
+    "code": "LilZ",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/28136/1",
+      "2x": "https://cdn.betterttv.net/frankerfacez_emote/28136/2",
+      "4x": "https://cdn.betterttv.net/frankerfacez_emote/28136/4"
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 28138,
+    "user": {
+      "id": 1,
+      "name": "sirstendec",
+      "displayName": "SirStendec"
+    },
+    "code": "ZliL",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/28138/1",
+      "2x": "https://cdn.betterttv.net/frankerfacez_emote/28138/2",
+      "4x": "https://cdn.betterttv.net/frankerfacez_emote/28138/4"
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 149346,
+    "user": {
+      "id": 2,
+      "name": "dansalvato",
+      "displayName": "dansalvato"
+    },
+    "code": "LaterSooner",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/149346/1",
+      "2x": "https://cdn.betterttv.net/frankerfacez_emote/149346/2",
+      "4x": "https://cdn.betterttv.net/frankerfacez_emote/149346/4"
+    },
+    "imageType": "png"
+  },
+  {
+    "id": 142673,
+    "user": {
+      "id": 2,
+      "name": "dansalvato",
+      "displayName": "dansalvato"
+    },
+    "code": "BORT",
+    "images": {
+      "1x": "https://cdn.betterttv.net/frankerfacez_emote/142673/1",
+      "2x": null,
+      "4x": null
+    },
+    "imageType": "png"
+  }
+]
