@@ -9,6 +9,8 @@
     - [X] Figure out how to query BTTV for emotes. [[*https://cdn.betterttv.net][here]]
     - [ ] Figure out what socket endpoint is used for
   - [ ] Figure out YouTube backend and messages sent from server to frontend
+    - chat messages are a response to POST request to `/youtubei/v1/live_chat/get_live_chat?key=idksomekeyhere`
+      - example [[file:yt-chat-request][request]] and [[file:yt-chat-response.json][response]]
   - [ ] Features (from BTTV extension pages) [0/4]
     - [ ] Extra emoticons - BetterTTV global and per-channel emotes [0/2]
       - [ ] Intercept messages from server
@@ -32,18 +34,18 @@
     NOTE: for info on querying emote image data see [[*https://cdn.betterttv.net][here]]
     - /3/cached/emotes/global
       - BTTV global emotes
-	  - [[file:bttv-global.json][example]]
+      - [[file:bttv-global.json][example]
     - /3/cached/users/twitch/{twitchID}
       - Queries for user's enabled BTTV emotes
       - https://api.betterttv.net/3/cached/users/twitch/71092938 returns BTTV emotes enabled by xqcow
-	  - [[file:bttv-xqc.json][example]]
+      - [[file:bttv-xqc.json][example]]
     - /3/cached/frankerfacez/emotes/global
       - FFZ global emotes
       - [[file:ffz-global.json][example]]
     - /3/cached/frankerfacez/users/twitch/{twitchID}
       - Queries for user's enabled FFZ emotes
       - https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938 returns FFZ emotes enabled by xqcow
-	  - [[file:ffz-xqc.json][example]]
+      - [[file:ffz-xqc.json][example]]
     - other
       - /3/cached/badges
       - /3/cached/changelog
