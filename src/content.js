@@ -4,6 +4,17 @@ const axios = require('axios');
 const $ = require('jquery')
 const Buffer = require('buffer').Buffer
 
+// listen for msg from background script
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if( request.message === "click browser action" ) {
+      var firstHref = $("a[href^='http']").eq(0).attr("href");
+
+      console.log(firstHref);
+    }
+  }
+);
+
 console.log("Hello from BYTV console")
 
 // TODO: only do things for YT links
