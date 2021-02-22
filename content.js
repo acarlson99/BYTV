@@ -12,11 +12,11 @@ console.log("Hello from BYTV console")
 const getRequest = async () => {
 	try {
 		const response = await axios.get('https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938');
+		console.log("DATA", response)
 		console.log(response.data[0].images['4x']);
 
 		const resp = await axios.get(response.data[0].images['4x'])
 		const d = resp.data
-		console.log(d)
 
 		const b64 = Buffer.from(d).toString("base64")
 
