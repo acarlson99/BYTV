@@ -18,23 +18,22 @@ console.log("Hello from BYTV console");
 // TODO: only do things for YT links
 // TODO: intercept live chat messages
 
-const getRequest = async () => {
+const changeLogo = async (img) => {
   try {
-    const response = await axios.get(
-      "https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938"
-    );
-    console.log("DATA", response);
-    console.log(response.data[0].images["4x"]);
-
-    const resp = await axios.get(response.data[0].images["4x"]);
-    const d = resp.data;
+    console.log(img);
 
     $("#logo-icon").html(
       '<img id="logo-icon" class="style-scope ytd-topbar-logo-renderer" src=' +
-        response.data[0].images["4x"] +
+        img +
         " />"
     );
+  } catch (err) {
+    console.error(err);
+  }
+};
 
+const getEmoteData = async () => {
+  try {
     var r1 = await axios.get(
       "https://api.betterttv.net/3/cached/emotes/global"
     );
@@ -67,10 +66,35 @@ const getRequest = async () => {
 };
 
 const f = async () => {
-  const emoteData = await getRequest();
+  const emoteData = await getEmoteData();
   console.log(emoteData);
+  console.log(emoteLinks(wordEmote("GabeN", emoteData)));
+  changeLogo(emoteLinks(wordEmote("GabeN", emoteData))["3x"]);
 };
 
 f();
+
+const wordEmote = (word, emoteData) => {
+  const l = emoteData.bttv
+    .filter((w) => w.code == word)
+    .concat(emoteData.ffz.filter((w) => w.code == word));
+  if (l.length > 0) {
+    return l[0];
+  } else {
+    return null;
+  }
+};
+
+const emoteLinks = (emote) => {
+  if (emote.images != null) {
+    return emote.images;
+  } else {
+    return {
+      "1x": `https://cdn.betterttv.net/emote/${emote.id}/1x`,
+      "2x": `https://cdn.betterttv.net/emote/${emote.id}/2x`,
+      "3x": `https://cdn.betterttv.net/emote/${emote.id}/3x`,
+    };
+  }
+};
 
 alert("Hello from BYTV");
