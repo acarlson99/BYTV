@@ -1,7 +1,9 @@
 // 'use strict'
 
 const $ = require("jquery");
-const emotes = require("./emotes.js");
+const { emotes, emoteHTML } = require("./emotes.js");
+
+var emoteMap = new Map();
 
 // listen for msg from background script
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -9,6 +11,35 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     var firstHref = $("a[href^='http']").eq(0).attr("href");
 
     console.log(firstHref);
+  } else if (request.message === "do thing") {
+    var chatframe = document.getElementsByTagName("iframe").chatframe
+      .contentDocument;
+    var chatElems = chatframe.getElementsByTagName(
+      "yt-live-chat-text-message-renderer"
+    );
+    if (chatElems.length == 0) {
+      return;
+    }
+
+    for (i = 0; i < chatElems.length; i++) {
+      try {
+        var msg = chatElems[i];
+        var p = msg.getElementsByClassName(
+          "yt-live-chat-text-message-renderer"
+        );
+        // TODO: fix this, don't hardcode p[4], is bad
+        p[4].innerHTML = "accept Him " + emoteHTML(emoteMap.get("GabeN"));
+        // if (p && p.length > 0) {
+        // 	for (i = 0; i < p.length; i++) {
+        // 		if (p && p[i].id == "message") {
+        // 			p[i].innerText = "hehehehe gay";
+        // 			console.log("CHANGED");
+        // 			throw("")
+        // 		}
+        // 	}
+        // }
+      } catch (err) {}
+    }
   }
 });
 
@@ -32,7 +63,11 @@ const changeLogo = async (img) => {
 
 const f = async () => {
   const m = await emotes();
+  emoteMap = m;
   console.log(m);
+  const gbn = m.get("GabeN");
+  console.log(gbn);
+  console.log("EMOTE HTML", emoteHTML(gbn));
 
   console.log(
     "GabeN is	 our         lord".replace(/\w+/g, (s) => {
@@ -48,4 +83,4 @@ const f = async () => {
 
 f();
 
-alert("Hello from BYTV");
+// alert("Hello from BYTV");

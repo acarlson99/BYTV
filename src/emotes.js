@@ -77,4 +77,8 @@ const emotes = async () => {
   return emoteMap(e);
 };
 
-module.exports = emotes;
+const emoteHTML = (emoteObj) => {
+  return `<img class="emoji yt-formatted-string style-scope yt-live-chat-text-message-renderer" src="${emoteObj.images["1x"]}" alt="${emoteObj.code}" shared-tooltip-text="${emoteObj.code}" id="emoji-8">`;
+};
+
+module.exports = { emotes, emoteHTML };

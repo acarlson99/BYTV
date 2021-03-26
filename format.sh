@@ -1,0 +1,1 @@
+prettier -w src/*.js

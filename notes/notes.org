@@ -11,10 +11,12 @@
   - [ ] Figure out YouTube backend and messages sent from server to frontend
     - chat messages are a response to POST request to `/youtubei/v1/live_chat/get_live_chat?key=idksomekeyhere`
       - example [[file:yt-chat-request][request]] and [[file:yt-chat-response.json][response]]
-  - [ ] Features (from BTTV extension pages) [0/4]
-    - [ ] Extra emoticons - BetterTTV global and per-channel emotes [0/2]
-      - [ ] Intercept messages from server
+  - [ ] Features (from BTTV extension pages) [0/5]
+    - [ ] Extra emoticons - BetterTTV global and per-channel emotes [0/3]
+      - [ ] [[https://github.com/night/betterttv/blob/master/src/modules/emotes/emote.js#L18-L43][ToHTML function]] (display like chat emote)
+      - [ ] Somehow update chat messages
       - [ ] Check message for keywords, query BTTV API for corresponding emote
+    - [ ] Extended emote menu ([[https://github.com/night/betterttv/blob/master/src/modules/emote_menu/index.js][example]])
     - [ ] Username/Word/Phrase highlighting [0/2]
       Given a list of words/phrases, highlight instances
       - [ ] Live chat
