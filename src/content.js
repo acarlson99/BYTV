@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     var firstHref = $("a[href^='http']").eq(0).attr("href");
 
     console.log(firstHref);
-  } else if (request.message === "do thing") {
+  // } else if (request.message === "do thing") {
     var chatframe = document.getElementsByTagName("iframe").chatframe
       .contentDocument;
     var chatElems = chatframe.getElementsByTagName(
@@ -38,14 +38,16 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         // 		}
         // 	}
         // }
-      } catch (err) {}
+      } catch (err) {
+		  console.log("ERRRRRRR", err)
+	  }
     }
   }
 });
 
 console.log("Hello from BYTV console");
 
-// TODO: intercept live chat messages
+// TODO: detect chatframe change and update emotes
 
 const changeLogo = async (img) => {
   try {

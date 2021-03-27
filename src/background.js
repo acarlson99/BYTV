@@ -17,7 +17,7 @@ async function a() {
       var activeTab = tabs[0];
       chrome.tabs.sendMessage(activeTab.id, { message: "do thing" });
     });
-    await sleep(3000);
+    await sleep(3000); // TODO: not this
   }
 }
 

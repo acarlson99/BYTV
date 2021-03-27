@@ -11,12 +11,18 @@
   - [ ] Figure out YouTube backend and messages sent from server to frontend
     - chat messages are a response to POST request to `/youtubei/v1/live_chat/get_live_chat?key=idksomekeyhere`
       - example [[file:yt-chat-request][request]] and [[file:yt-chat-response.json][response]]
-  - [ ] Features (from BTTV extension pages) [0/5]
-    - [ ] Extra emoticons - BetterTTV global and per-channel emotes [0/3]
-      - [ ] [[https://github.com/night/betterttv/blob/master/src/modules/emotes/emote.js#L18-L43][ToHTML function]] (display like chat emote)
+  - [-] Features (from BTTV extension pages) [0/6]
+    - [-] Extra emoticons - BetterTTV global and per-channel emotes [1/4]
+      - [X] [[https://github.com/night/betterttv/blob/master/src/modules/emotes/emote.js#L18-L43][ToHTML function]] (display like chat emote)
       - [ ] Somehow update chat messages
       - [ ] Check message for keywords, query BTTV API for corresponding emote
+	  - [ ] Use correct BTTV ID to query emote endpoint [0/4]
+		- [ ] Check YT `about` page for linked Twitch channel
+		- [ ] Check YT name against BTTV
+		- [ ] Check YT `about` page for embedded Twitch username or BTTV ID
+		- [ ] Default to tyler1 or xqc or michaelreeves or disguisedtoast or some shit idk lmao
     - [ ] Extended emote menu ([[https://github.com/night/betterttv/blob/master/src/modules/emote_menu/index.js][example]])
+	- [ ] Display emote info on hover
     - [ ] Username/Word/Phrase highlighting [0/2]
       Given a list of words/phrases, highlight instances
       - [ ] Live chat
@@ -28,7 +34,7 @@
     - [ ] See deleted links and messages [0/2]
       If live chat message is deleted then grey out msg (or smth) instead of deleting it from chat history
       - [ ] Intercept `delmsg` from server
-      - [ ] Modify chat message instead of deleting it entirely
+      - [ ] Modify chat message (grey out or smth) instead of deleting it entirely
 * Endpoints
 ** Documentation
 *** https://api.betterttv.net
