@@ -1,24 +1,16 @@
-// send message when extension button clicked
-chrome.browserAction.onClicked.addListener(function (tab) {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    var activeTab = tabs[0];
-    chrome.tabs.sendMessage(activeTab.id, { message: "click browser action" });
-  });
-});
-
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// update chat
-async function a() {
+// update chat every so many seconds
+async function sendPeriodicMessage(msg, period) {
   for (;;) {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       var activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, { message: "do thing" });
+      chrome.tabs.sendMessage(activeTab.id, { message: msg });
     });
-    await sleep(3000); // TODO: not this
+    await sleep(period); // TODO: not this. Could be better
   }
 }
 
-a();
+sendPeriodicMessage("update chatframe", 1000);

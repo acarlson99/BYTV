@@ -3,7 +3,7 @@
   - C-c C-c checks/unchecks boxes. [[https://orgmode.org/manual/Checkboxes.html][Details]]
   - [[https://portswigger.net/burp/communitydownload][burp suite]] is very useful. [[https://portswigger.net/burp/documentation/desktop/getting-started][Getting started]]
   - [[https://medium.com/dev-genius/how-to-make-a-chrome-extension-f37bdfb6edb3][this]] blog post is probably useful
-* TODO [0/3]
+* TODO [0/5]
   - [-] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [2/3]
     - [X] Use Burp Suite to find BTTV endpoints. [[*Documentation][here]]
     - [X] Figure out how to query BTTV for emotes. [[*https://cdn.betterttv.net][here]]
@@ -12,17 +12,19 @@
     - chat messages are a response to POST request to `/youtubei/v1/live_chat/get_live_chat?key=idksomekeyhere`
       - example [[file:yt-chat-request][request]] and [[file:yt-chat-response.json][response]]
   - [-] Features (from BTTV extension pages) [0/6]
-    - [-] Extra emoticons - BetterTTV global and per-channel emotes [1/4]
+    - [-] Extra emoticons - BetterTTV global and per-channel emotes [3/6]
       - [X] [[https://github.com/night/betterttv/blob/master/src/modules/emotes/emote.js#L18-L43][ToHTML function]] (display like chat emote)
-      - [ ] Somehow update chat messages
-      - [ ] Check message for keywords, query BTTV API for corresponding emote
-	  - [ ] Use correct BTTV ID to query emote endpoint [0/4]
-		- [ ] Check YT `about` page for linked Twitch channel
-		- [ ] Check YT name against BTTV
-		- [ ] Check YT `about` page for embedded Twitch username or BTTV ID
-		- [ ] Default to tyler1 or xqc or michaelreeves or disguisedtoast or some shit idk lmao
+      - [X] Somehow update chat messages
+      - [X] Check message for keywords, query BTTV API for corresponding emote
+      - [ ] Update chatframe emotes only when chatframe modified
+	  - [ ] Fix how HTML is updated. Could be much better
+      - [ ] Use correct BTTV ID to query emote endpoint [0/4]
+        - [ ] Check YT `about` page for linked Twitch channel
+        - [ ] Check YT name against BTTV
+        - [ ] Check YT `about` page for embedded Twitch username or BTTV ID
+        - [ ] Default to tyler1 or xqc or michaelreeves or disguisedtoast or some shit idk lmao
     - [ ] Extended emote menu ([[https://github.com/night/betterttv/blob/master/src/modules/emote_menu/index.js][example]])
-	- [ ] Display emote info on hover
+    - [ ] Display emote info on hover
     - [ ] Username/Word/Phrase highlighting [0/2]
       Given a list of words/phrases, highlight instances
       - [ ] Live chat
@@ -35,6 +37,11 @@
       If live chat message is deleted then grey out msg (or smth) instead of deleting it from chat history
       - [ ] Intercept `delmsg` from server
       - [ ] Modify chat message (grey out or smth) instead of deleting it entirely
+  - [ ] Misc
+    - [ ] Use JQuery instead of yucky `getElementsByClassName` functions
+  - [ ] Deploy [0/2]
+    - [ ] Create Chrome store acct (call it OrcaDev or some shit)
+    - [ ] Update out manifest.json
 * Endpoints
 ** Documentation
 *** https://api.betterttv.net
