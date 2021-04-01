@@ -1,37 +1,37 @@
 // 'use strict'
 
-const $ = require('jquery');
-const { emotes, emoteHTML } = require('./emotes.js');
+const $ = require("jquery");
+const { emotes, emoteHTML } = require("./emotes.js");
 
-var emoteMap = new Map();
+let emoteMap = new Map();
 
 const logErr = (...args) => {
-  console.log('BYTV log:', ...args);
+  console.log("BYTV log:", ...args);
 };
 
 const updateChatframe = () => {
-  var chatframe = document.getElementsByTagName('iframe').chatframe
+  const chatframe = document.getElementsByTagName("iframe").chatframe
     .contentDocument;
-  var chatElems = chatframe.getElementsByTagName(
-    'yt-live-chat-text-message-renderer'
+  const chatElems = chatframe.getElementsByTagName(
+    "yt-live-chat-text-message-renderer"
   );
   if (chatElems.length <= 0) {
     return;
   }
 
   // for all existing messages
-  for (var i = 0; i < chatElems.length; i++) {
+  for (let i = 0; i < chatElems.length; i++) {
     try {
-      var msg = chatElems[i];
-      var p = msg.getElementsByClassName('yt-live-chat-text-message-renderer');
+      const msg = chatElems[i];
+      const p = msg.getElementsByClassName("yt-live-chat-text-message-renderer");
 
       // update msg HTML
-      var s = p.message.innerHTML.split(/[<>]/); // TODO: dont do this, is bad
-      for (var j = 0; j < s.length; j++) {
-        if (j % 2 == 0) {
+      const s = p.message.innerHTML.split(/[<>]/); // TODO: dont do this, is bad
+      for (let j = 0; j < s.length; j++) {
+        if (j % 2 === 0) {
           // every odd index is an HTML element
-          s[j] = s[j].replace(/\w+/g, (ss) => {
-            var emote = emoteMap.get(ss);
+          s[j] = s[j].replace(/\w+/g, ss => {
+            const emote = emoteMap.get(ss);
             if (emote) {
               return emoteHTML(emote);
             } else {
@@ -39,10 +39,10 @@ const updateChatframe = () => {
             }
           });
         } else {
-          s[j] = '<' + s[j] + '>';
+          s[j] = "<" + s[j] + ">";
         }
       }
-      p.message.innerHTML = s.join('');
+      p.message.innerHTML = s.join("");
     } catch (err) {
       logErr(err);
     }
@@ -50,27 +50,27 @@ const updateChatframe = () => {
 };
 
 // listen for msg from background script
-chrome.runtime.onMessage.addListener(function (request) {
-  if (request.message === 'update chatframe') {
+chrome.runtime.onMessage.addListener(request => {
+  if (request.message === "update chatframe") {
     updateChatframe();
   }
 });
 
-const changeLogo = async (img) => {
+const changeLogo = async img => {
   try {
     console.log(img);
 
-    $('#logo-icon').html(
+    $("#logo-icon").html(
       '<img id="logo-icon" class="style-scope ytd-topbar-logo-renderer" src=' +
         img +
-        ' />'
+        " />"
     );
   } catch (err) {
     console.error(err);
   }
 };
 
-const updateEmotes = async () => {
+const updateEmotes = async() => {
   const m = await emotes();
   emoteMap = m;
   // console.log(m);
