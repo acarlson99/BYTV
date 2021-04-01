@@ -1,28 +1,28 @@
 {
-	"name": "better-ytv",
-	"version": "1.0.0",
-	"description": "better youtube",
-	"main": "content.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/acarlson99/BYTV.git"
-	},
-	"keywords": [
-		"youtube",
-		"better-ttv",
-		"FrankerFaceZ"
-	],
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/acarlson99/BYTV/issues"
-	},
-	"homepage": "https://github.com/acarlson99/BYTV#readme",
-	"dependencies": {
-		"axios": "^0.21.1",
-		"browserify": "^17.0.0",
-		"jquery": "^3.5.1"
-	}
+  "name": "BYTV",
+  "version": "1.0.0",
+  "description": "Better YouTube, inspired by [BetterTTV](https://betterttv.com/)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acarlson99/BYTV.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acarlson99/BYTV/issues"
+  },
+  "homepage": "https://github.com/acarlson99/BYTV#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "browserify": "^17.0.0",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-plugin-react": "^7.23.1"
+  }
 }

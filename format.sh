@@ -1,1 +1,1 @@
-prettier -w src/*.js
+npx eslint src/*.js --fix

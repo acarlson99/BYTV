@@ -13,4 +13,4 @@ async function sendPeriodicMessage(msg, period) {
   }
 }
 
-sendPeriodicMessage("update chatframe", 1000);
+sendPeriodicMessage('update chatframe', 1000);

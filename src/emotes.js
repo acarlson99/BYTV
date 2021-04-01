@@ -1,28 +1,28 @@
-const axios = require("axios");
+const axios = require('axios');
 
 const getEmoteData = async () => {
   try {
     var r1 = await axios.get(
-      "https://api.betterttv.net/3/cached/emotes/global"
+      'https://api.betterttv.net/3/cached/emotes/global'
     );
     var r2 = await axios.get(
-      "https://api.betterttv.net/3/cached/users/twitch/71092938"
+      'https://api.betterttv.net/3/cached/users/twitch/71092938'
     );
 
     const bttvEmoteData = r1.data
-      .concat(r2.data["channelEmotes"])
-      .concat(r2.data["sharedEmotes"]); // always has id,code,imageType
-    console.log("bttv:", bttvEmoteData);
+      .concat(r2.data['channelEmotes'])
+      .concat(r2.data['sharedEmotes']); // always has id,code,imageType
+    console.log('bttv:', bttvEmoteData);
 
     r1 = await axios.get(
-      "https://api.betterttv.net/3/cached/frankerfacez/emotes/global"
+      'https://api.betterttv.net/3/cached/frankerfacez/emotes/global'
     );
     r2 = await axios.get(
-      "https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938"
+      'https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938'
     );
 
     const ffzEmoteData = r1.data.concat(r2.data); // always has id,code,imageType, and `images` field with links to source img
-    console.log("ffz:", ffzEmoteData);
+    console.log('ffz:', ffzEmoteData);
     return {
       bttv: bttvEmoteData,
       ffz: ffzEmoteData,
@@ -49,9 +49,9 @@ const emoteLinks = (emote) => {
     return emote.images;
   } else {
     return {
-      "1x": `https://cdn.betterttv.net/emote/${emote.id}/1x`,
-      "2x": `https://cdn.betterttv.net/emote/${emote.id}/2x`,
-      "3x": `https://cdn.betterttv.net/emote/${emote.id}/3x`,
+      '1x': `https://cdn.betterttv.net/emote/${emote.id}/1x`,
+      '2x': `https://cdn.betterttv.net/emote/${emote.id}/2x`,
+      '3x': `https://cdn.betterttv.net/emote/${emote.id}/3x`,
     };
   }
 };
@@ -78,7 +78,7 @@ const emotes = async () => {
 };
 
 const emoteHTML = (emoteObj) => {
-  return `<img class="emoji yt-formatted-string style-scope yt-live-chat-text-message-renderer" src="${emoteObj.images["1x"]}" alt="${emoteObj.code}" shared-tooltip-text="${emoteObj.code}">`;
+  return `<img class="emoji yt-formatted-string style-scope yt-live-chat-text-message-renderer" src="${emoteObj.images['1x']}" alt="${emoteObj.code}" shared-tooltip-text="${emoteObj.code}">`;
 };
 
 module.exports = { emotes, emoteHTML };
