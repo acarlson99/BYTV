@@ -9,10 +9,13 @@ const logErr = (...args) => {
   console.log("BYTV log:", ...args);
 };
 
+const fixHTMLString = s => {
+  return s.replace(/&amp;/g, () => "&"); // TODO: make this better
+};
+
 const updateChatframe = () => {
   const chatElems = $("#chatframe")[0].contentDocument.
     getElementsByTagName("yt-live-chat-text-message-renderer");
-  console.log(chatElems);
   if (chatElems.length <= 0) {
     return;
   }
@@ -29,15 +32,17 @@ const updateChatframe = () => {
       for (let j = 0; j < s.length; j++) {
         if (j % 2 === 0) {
           // every odd index is an HTML element
-          s[j] = s[j].replace(/\w+/g, ss => {
-            const emote = emoteMap.get(ss);
+          // s[j] = s[j].replace(/\w+/g, (space1,str,space2) => {
+          s[j] = s[j].replace(/(\s*)([^\s]+)(\s*)/g, (a, space1, str, space2) => {
+            const emote = emoteMap.get(fixHTMLString(str));
             if (emote) {
-              return emoteHTML(emote);
+              return space1 + emoteHTML(emote) + space2;
             } else {
-              return ss;
+              return space1 + str + space2;
             }
           });
         } else {
+          // is HTML element, reconstruct HTML
           s[j] = "<" + s[j] + ">";
         }
       }

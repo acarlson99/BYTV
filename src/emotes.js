@@ -1,27 +1,40 @@
 const axios = require("axios");
 
+const setSrc = (o, lst) => {
+  o.src = lst;
+  return o;
+};
+
 const getEmoteData = async() => {
   try {
-    let r1 = await axios.get(
+    const bttvGlobal = await axios.get(
       "https://api.betterttv.net/3/cached/emotes/global"
     );
-    let r2 = await axios.get(
+    const bttvChannel = await axios.get(
       "https://api.betterttv.net/3/cached/users/twitch/71092938"
     );
 
-    const bttvEmoteData = r1.data
-      .concat(r2.data.channelEmotes)
-      .concat(r2.data.sharedEmotes); // always has id,code,imageType
+    console.log(bttvGlobal, bttvChannel);
+
+    const bttvEmoteData = bttvGlobal.data
+      .map(a => setSrc(a, ["bttv", "global"]))
+      .concat(bttvChannel.data.channelEmotes
+        .map(a => setSrc(a, ["bttv", "channel", "channel"]))
+        .concat(bttvChannel.data.sharedEmotes
+          .map(a => setSrc(a, ["bttv", "channel", "shared"])))); // always has id,code,imageType
     console.log("bttv:", bttvEmoteData);
 
-    r1 = await axios.get(
+    const ffzGlobal = await axios.get(
       "https://api.betterttv.net/3/cached/frankerfacez/emotes/global"
     );
-    r2 = await axios.get(
+    const ffzChannel = await axios.get(
       "https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938"
     );
 
-    const ffzEmoteData = r1.data.concat(r2.data); // always has id,code,imageType, and `images` field with links to source img
+    const ffzEmoteData = ffzGlobal.data
+      .map(a => setSrc(a, ["ffz", "global"]))
+      .concat(ffzChannel.data
+        .map(a => setSrc(a, ["ffz", "channel"]))); // always has id,code,imageType, and `images` field with links to source img
     console.log("ffz:", ffzEmoteData);
     return {
       bttv: bttvEmoteData,
@@ -33,16 +46,16 @@ const getEmoteData = async() => {
   }
 };
 
-const wordEmote = (word, emoteData) => {
-  const l = emoteData.bttv
-    .filter(w => w.code === word)
-    .concat(emoteData.ffz.filter(w => w.code === word));
-  if (l.length > 0) {
-    return l[0];
-  } else {
-    return null;
-  }
-};
+// const wordEmote = (word, emoteData) => {
+//   const l = emoteData.bttv
+//     .filter(w => w.code === word)
+//     .concat(emoteData.ffz.filter(w => w.code === word));
+//   if (l.length > 0) {
+//     return l[0];
+//   } else {
+//     return null;
+//   }
+// };
 
 const emoteLinks = emote => {
   if (emote.images != null) {
