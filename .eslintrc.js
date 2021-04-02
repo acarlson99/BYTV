@@ -19,9 +19,9 @@ module.exports = {
     "react"
   ],
   "rules": {
-    /**
-	 * Variables
-	 */
+    /*
+    ** Variables
+    */
     "no-shadow": 2,                  // http://eslint.org/docs/rules/no-shadow
     "no-shadow-restricted-names": 2, // http://eslint.org/docs/rules/no-shadow-restricted-names
     "no-unused-vars": [2, {          // http://eslint.org/docs/rules/no-unused-vars
@@ -32,9 +32,9 @@ module.exports = {
     "no-use-before-define": 2,       // http://eslint.org/docs/rules/no-use-before-define
 
 
-    /**
-	 * Possible errors
-	 */
+    /*
+    ** Possible errors
+    */
     "comma-dangle": 0,               // http://eslint.org/docs/rules/comma-dangle
     "no-cond-assign": [2, "always"], // http://eslint.org/docs/rules/no-cond-assign
     "no-constant-condition": 1,      // http://eslint.org/docs/rules/no-constant-condition
@@ -55,9 +55,9 @@ module.exports = {
     "use-isnan": 2,                  // http://eslint.org/docs/rules/use-isnan
     "block-scoped-var": 2,           // http://eslint.org/docs/rules/block-scoped-var
 
-    /**
-	 * Best practices
-	 */
+    /*
+    ** Best practices
+    */
     "consistent-return": 0,          // http://eslint.org/docs/rules/consistent-return
     "curly": [2, "multi-line"],      // http://eslint.org/docs/rules/curly
     "default-case": 0,               // http://eslint.org/docs/rules/default-case
@@ -97,9 +97,9 @@ module.exports = {
     "wrap-iife": [2, "any"],         // http://eslint.org/docs/rules/wrap-iife
     "yoda": 0,                       // http://eslint.org/docs/rules/yoda
 
-    /**
-	 * Style
-	 */
+    /*
+    ** Style
+    */
     "brace-style": [2,               // http://eslint.org/docs/rules/brace-style
       "1tbs", {
         "allowSingleLine": true
@@ -141,6 +141,13 @@ module.exports = {
     "no-spaced-func": 2,             // http://eslint.org/docs/rules/no-spaced-func
     "no-trailing-spaces": 2,         // http://eslint.org/docs/rules/no-trailing-spaces
     "no-underscore-dangle": 0,       // http://eslint.org/docs/rules/no-underscore-dangle
+    "max-len": [
+      "error", {
+        "code": 80,
+        "tabWidth": 4,
+        "ignoreUrls": true,
+        "ignoreComments": true
+      }],
     "padded-blocks": [2, "never"],   // http://eslint.org/docs/rules/padded-blocks
     "semi": [2, "always"],           // http://eslint.org/docs/rules/semi
     "semi-spacing": [2, {            // http://eslint.org/docs/rules/semi-spacing

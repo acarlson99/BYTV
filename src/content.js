@@ -10,11 +10,9 @@ const logErr = (...args) => {
 };
 
 const updateChatframe = () => {
-  const chatframe = document.getElementsByTagName("iframe").chatframe
-    .contentDocument;
-  const chatElems = chatframe.getElementsByTagName(
-    "yt-live-chat-text-message-renderer"
-  );
+  const chatElems = $("#chatframe")[0].contentDocument.
+    getElementsByTagName("yt-live-chat-text-message-renderer");
+  console.log(chatElems);
   if (chatElems.length <= 0) {
     return;
   }
@@ -23,7 +21,8 @@ const updateChatframe = () => {
   for (let i = 0; i < chatElems.length; i++) {
     try {
       const msg = chatElems[i];
-      const p = msg.getElementsByClassName("yt-live-chat-text-message-renderer");
+      const p = msg.
+        getElementsByClassName("yt-live-chat-text-message-renderer");
 
       // update msg HTML
       const s = p.message.innerHTML.split(/[<>]/); // TODO: dont do this, is bad
@@ -52,7 +51,9 @@ const updateChatframe = () => {
 // listen for msg from background script
 chrome.runtime.onMessage.addListener(request => {
   if (request.message === "update chatframe") {
-    updateChatframe();
+    try {
+      updateChatframe();
+    } catch (err) {}
   }
 });
 
@@ -79,7 +80,7 @@ const updateEmotes = async() => {
   // console.log("EMOTE HTML", emoteHTML(gbn));
 
   // console.log(
-  //   "GabeN is	 our         lord".replace(/\w+/g, (s) => {
+  //   "GabeN is	our         lord".replace(/\w+/g, (s) => {
   //     if (m.get(s)) {
   //         return emoteHTML(m.get(s));
   //     } else {

@@ -1,6 +1,6 @@
-const ariaLabel = 'BTTV';
-const innerText = 'BTTV';
-var customEmojiTemplate = `<yt-emoji-picker-category-button-renderer
+const ariaLabel = "BTTV";
+const innerText = "BTTV";
+const customEmojiTemplate = `<yt-emoji-picker-category-button-renderer
         class="style-scope yt-emoji-picker-renderer"
         id="UCSJ4gkVC6NrvII8umztf0Ow"
         ><!--css-build:shady--><yt-icon-button
