@@ -5,10 +5,13 @@ function sleep(ms) {
 // update chat every so many seconds
 async function sendPeriodicMessage(msg, period) {
   for (;;) {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-      const activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, { message: msg });
-    });
+    try {
+      chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        if (tabs === undefined || tabs.length < 1) return
+        const activeTab = tabs[0];
+        chrome.tabs.sendMessage(activeTab.id, { message: msg });
+      });
+    } catch(err){}
     await sleep(period); // TODO: not this. Could be better
   }
 }

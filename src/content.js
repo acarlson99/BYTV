@@ -1,5 +1,3 @@
-// 'use strict'
-
 const $ = require("jquery");
 const { emotes, emoteHTML } = require("./emotes.js");
 
@@ -13,9 +11,24 @@ const fixHTMLString = s => {
   return s.replace(/&amp;/g, () => "&"); // TODO: make this better
 };
 
-const msgVisible = (msg, chatframe) => {
-  const rect = msg.getBoundingClientRect();
-  return (rect.y < chatframe.scrollHeight && rect.y > 0);
+// f => 0 == good
+//     -1 == too low
+//      1 == too high
+// e.g. binarySearchArr([0,1,2,3,4,5], (x) => 3-x)
+//   => 3
+const binarySearchArr = (arr, f) => {
+  let start = 0;
+  let end = arr.length - 1;
+  var mid;
+
+  while (start <= end) {
+    mid = Math.floor((start + end) / 2);
+    const res = f(arr[mid]);
+    if (res === 0) return mid;
+    else if (res > 0) start = mid + 1;
+    else end = mid - 1;
+  }
+  return mid;
 };
 
 const updateChatframe = () => {
@@ -26,13 +39,22 @@ const updateChatframe = () => {
     return;
   }
 
-  // for all existing messages
-  for (let i = 0; i < chatElems.length; i++) {
+  const smallestVisible = binarySearchArr(chatElems, (x) => {
+    const rect = x.getBoundingClientRect();
+    return (0 - rect.bottom)
+  })
+  const start = Math.max(0, smallestVisible-2) // small buffer to preload just-out-of-frame messages
+
+  // for all existing messages, starting from first visible message
+  for (let i = start; i < chatElems.length; i++) {
     try {
       const msg = chatElems[i];
 
       // Only update if msg in frame
-      if (!msgVisible(msg, chatframe)) {
+      const rect = msg.getBoundingClientRect();
+      if (rect.top > chatframe.scrollHeight) {
+        break;
+      } else if (rect.bottom + 50 < 0) {
         continue;
       }
 
@@ -40,7 +62,7 @@ const updateChatframe = () => {
         .getElementsByClassName("yt-live-chat-text-message-renderer");
 
       // update msg HTML
-      const s = p.message.innerHTML.split(/[<>]/); // TODO: dont do this, is bad
+      const s = p.message.innerHTML.split(/[<>]/); // TODO: change this later
       for (let j = 0; j < s.length; j++) {
         if (j % 2 === 0) {
           // not HTML element; replace words with emotes
@@ -58,10 +80,11 @@ const updateChatframe = () => {
           s[j] = "<" + s[j] + ">";
         }
       }
-      if (s.join("") == p.message.innerHTML) {
+      updatedHTML = s.join("")
+      if (updatedHTML == p.message.innerHTML) {
         continue;
       }
-      p.message.innerHTML = s.join("");
+      p.message.innerHTML = updatedHTML
     } catch (err) {
       logErr(err);
     }
@@ -94,20 +117,6 @@ const changeLogo = async img => {
 const updateEmotes = async() => {
   const m = await emotes();
   emoteMap = m;
-  // console.log(m);
-  // const gbn = m.get("GabeN");
-  // console.log(gbn);
-  // console.log("EMOTE HTML", emoteHTML(gbn));
-
-  // console.log(
-  //   "GabeN is	our         lord".replace(/\w+/g, (s) => {
-  //     if (m.get(s)) {
-  //         return emoteHTML(m.get(s));
-  //     } else {
-  //       return s;
-  //     }
-  //   })
-  // );
 };
 
 updateEmotes(); // TODO: find better way to do this. Could lead to race conditions
