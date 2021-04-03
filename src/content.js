@@ -3,6 +3,8 @@ const { emotes, emoteHTML } = require("./emotes.js");
 
 let emoteMap = new Map();
 
+const bttvUpdatedContainer = "bttv-updated-container";
+
 const logErr = (...args) => {
   console.log("BYTV log:", ...args);
 };
@@ -58,6 +60,11 @@ const updateChatframe = () => {
         continue;
       }
 
+      // if already updated, skip
+      if (msg.classList.contains(bttvUpdatedContainer)) {
+        continue;
+      }
+
       const p = msg
         .getElementsByClassName("yt-live-chat-text-message-renderer");
 
@@ -81,6 +88,7 @@ const updateChatframe = () => {
         }
       }
       const updatedHTML = s.join("");
+      msg.classList.add(bttvUpdatedContainer);
       if (updatedHTML === p.message.innerHTML) {
         continue;
       }
