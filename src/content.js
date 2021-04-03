@@ -13,9 +13,15 @@ const fixHTMLString = s => {
   return s.replace(/&amp;/g, () => "&"); // TODO: make this better
 };
 
+const msgVisible = (msg, chatframe) => {
+  const rect = msg.getBoundingClientRect();
+  return (rect.y < chatframe.scrollHeight && rect.y > 0);
+};
+
 const updateChatframe = () => {
-  const chatElems = $("#chatframe")[0].contentDocument.
-    getElementsByTagName("yt-live-chat-text-message-renderer");
+  const chatframe = $("#chatframe")[0];
+  const chatElems = chatframe.contentDocument
+    .getElementsByTagName("yt-live-chat-text-message-renderer");
   if (chatElems.length <= 0) {
     return;
   }
@@ -24,8 +30,14 @@ const updateChatframe = () => {
   for (let i = 0; i < chatElems.length; i++) {
     try {
       const msg = chatElems[i];
-      const p = msg.
-        getElementsByClassName("yt-live-chat-text-message-renderer");
+
+      // Only update if msg in frame
+      if (!msgVisible(msg, chatframe)) {
+        continue;
+      }
+
+      const p = msg
+        .getElementsByClassName("yt-live-chat-text-message-renderer");
 
       // update msg HTML
       const s = p.message.innerHTML.split(/[<>]/); // TODO: dont do this, is bad
