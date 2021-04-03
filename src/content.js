@@ -19,7 +19,7 @@ const fixHTMLString = s => {
 const binarySearchArr = (arr, f) => {
   let start = 0;
   let end = arr.length - 1;
-  var mid;
+  let mid;
 
   while (start <= end) {
     mid = Math.floor((start + end) / 2);
@@ -39,11 +39,11 @@ const updateChatframe = () => {
     return;
   }
 
-  const smallestVisible = binarySearchArr(chatElems, (x) => {
+  const smallestVisible = binarySearchArr(chatElems, x => {
     const rect = x.getBoundingClientRect();
-    return (0 - rect.bottom)
-  })
-  const start = Math.max(0, smallestVisible-2) // small buffer to preload just-out-of-frame messages
+    return (0 - rect.bottom);
+  });
+  const start = Math.max(0, smallestVisible - 2); // small buffer to preload just-out-of-frame messages
 
   // for all existing messages, starting from first visible message
   for (let i = start; i < chatElems.length; i++) {
@@ -80,11 +80,11 @@ const updateChatframe = () => {
           s[j] = "<" + s[j] + ">";
         }
       }
-      updatedHTML = s.join("")
-      if (updatedHTML == p.message.innerHTML) {
+      const updatedHTML = s.join("");
+      if (updatedHTML === p.message.innerHTML) {
         continue;
       }
-      p.message.innerHTML = updatedHTML
+      p.message.innerHTML = updatedHTML;
     } catch (err) {
       logErr(err);
     }

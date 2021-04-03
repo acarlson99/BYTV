@@ -1,0 +1,71 @@
+{
+  "actions": [
+    {
+      "addChatItemAction": {
+        "item": {
+          "liveChatTextMessageRenderer": {
+            "message": {
+              "runs": [
+                {
+                  "text": "yeet"
+                }
+              ]
+            },
+            "authorName": {
+              "simpleText": "BYTV Dev"
+            },
+            "authorPhoto": {},
+            "contextMenuEndpoint": {},
+            "id": "CjoKGkNLbU05bzNTNGU4Q0ZiTWFyUVlka19jQ3dBEhxDTWZfdXZfRTRlOENGWVdBeEFvZGpwOExlUTEw",
+            "timestampUsec": "1617438005102178",
+            "authorBadges": []
+          }
+        }
+      }
+    },
+    {
+      "addChatItemAction": {
+        "item": {
+          "liveChatTextMessageRenderer": {
+            "message": {
+              "runs": [
+                {
+                  "text": "yeet"
+                }
+              ]
+            },
+            "id": "CjoKGkNQdTRrSTdTNGU4Q0ZhZ0RyUVlkemdrRzZnEhxDTWZfdXZfRTRlOENGWVdBeEFvZGpwOExlUTEx"
+          }
+        }
+      }
+    },
+    {
+      "addChatItemAction": {
+        "item": {
+          "liveChatTextMessageRenderer": {
+            "message": {
+              "runs": [
+                {
+                  "text": "yeet"
+                }
+              ]
+            },
+            "id": "CjoKGkNKS3IyNDdTNGU4Q0ZSTU5yUVlkTGQ0QzBnEhxDTWZfdXZfRTRlOENGWVdBeEFvZGpwOExlUTEz"
+          }
+        }
+      }
+    },
+    {
+      "markChatItemAsDeletedAction": {
+        "deletedStateMessage": {
+          "runs": [
+            {
+              "text": "[message retracted]"
+            }
+          ]
+        },
+        "targetItemId": "CjoKGkNLSG5vWTdTNGU4Q0ZkZkF3Z1FkVjI4RUVnEhxDTWZfdXZfRTRlOENGWVdBeEFvZGpwOExlUTEy"
+      }
+    }
+  ]
+}

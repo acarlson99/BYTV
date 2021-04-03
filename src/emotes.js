@@ -18,8 +18,6 @@ const getEmoteData = async() => {
       "https://api.betterttv.net/3/cached/users/twitch/71092938"
     );
 
-    console.log(bttvGlobal, bttvChannel);
-
     const bttvEmoteData = { // always has id,code,imageType
       global: bttvGlobal.data.map(a => setSrc(a, "bttv", "global", false)),
       channel: {

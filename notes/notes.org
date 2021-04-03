@@ -3,12 +3,12 @@
   - C-c C-c checks/unchecks boxes. [[https://orgmode.org/manual/Checkboxes.html][Details]]
   - [[https://portswigger.net/burp/communitydownload][burp suite]] is very useful. [[https://portswigger.net/burp/documentation/desktop/getting-started][Getting started]]
   - [[https://medium.com/dev-genius/how-to-make-a-chrome-extension-f37bdfb6edb3][this]] blog post is probably useful
-* TODO [0/5]
+* TODO [1/5]
   - [-] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [2/3]
     - [X] Use Burp Suite to find BTTV endpoints. [[*Documentation][here]]
     - [X] Figure out how to query BTTV for emotes. [[*https://cdn.betterttv.net][here]]
     - [ ] Figure out what socket endpoint is used for
-  - [ ] Figure out YouTube backend and messages sent from server to frontend
+  - [X] Figure out YouTube backend and messages sent from server to frontend
     - chat messages are a response to POST request to `/youtubei/v1/live_chat/get_live_chat?key=idksomekeyhere`
       - example [[file:yt-chat-request][request]] and [[file:yt-chat-response.json][response]]
   - [-] Features (from BTTV extension pages) [1/7]
@@ -33,9 +33,9 @@
       - [ ] Comment section
     - [ ] See deleted links and messages [0/2]
       If live chat message is deleted then grey out msg (or smth) instead of deleting it from chat history
-      - [ ] Intercept `delmsg` from server
+      - [ ] Intercept `delmsg` from server. See [[*https://www.youtube.com][here]]
       - [ ] Modify chat message (grey out or smth) instead of deleting it entirely
-  - [-] Optimization [1/4]
+  - [-] Optimize [1/4]
     - [X] Use JQuery instead of yucky `getElementsByClassName` functions
     - [ ] Only update chat elems in chatframe, not offscreen elems
     - [ ] Update chatframe emotes only when chatframe modified
@@ -81,6 +81,11 @@
   - /assets/logos/logo_icon.png
   - /assets/logos/settings_logo.png
   - /assets/logos/mascot.png
+*** https://www.youtube.com
+  - /youtubei/v1/live_chat/get_live_chat?key=key
+	- update live chat
+    - returns JSON. [[file:yt-chat-messages.json][example]]
+	- `addChatItemAction.item.id` and `markChatItemAsDeletedAction.targetItemId` fields correspond to HTML id
 ** Examples
 *** BTTV
 #+begin_src shell :results file :file bttv-global.json
