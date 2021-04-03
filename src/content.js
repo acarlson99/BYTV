@@ -31,20 +31,23 @@ const updateChatframe = () => {
       const s = p.message.innerHTML.split(/[<>]/); // TODO: dont do this, is bad
       for (let j = 0; j < s.length; j++) {
         if (j % 2 === 0) {
-          // every odd index is an HTML element
-          // s[j] = s[j].replace(/\w+/g, (space1,str,space2) => {
-          s[j] = s[j].replace(/(\s*)([^\s]+)(\s*)/g, (a, space1, str, space2) => {
-            const emote = emoteMap.get(fixHTMLString(str));
-            if (emote) {
-              return space1 + emoteHTML(emote) + space2;
-            } else {
-              return space1 + str + space2;
-            }
-          });
+          // not HTML element; replace words with emotes
+          s[j] = s[j].replace(/(\s*)([^\s]+)(\s*)/g,
+            (a, space1, str, space2) => {
+              const emote = emoteMap.get(fixHTMLString(str));
+              if (emote) {
+                return space1 + emoteHTML(emote) + space2;
+              } else {
+                return space1 + str + space2;
+              }
+            });
         } else {
-          // is HTML element, reconstruct HTML
+          // every odd index is an HTML element
           s[j] = "<" + s[j] + ">";
         }
+      }
+      if (s.join("") == p.message.innerHTML) {
+        continue;
       }
       p.message.innerHTML = s.join("");
     } catch (err) {

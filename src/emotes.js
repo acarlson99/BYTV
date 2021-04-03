@@ -1,7 +1,11 @@
 const axios = require("axios");
 
-const setSrc = (o, lst) => {
-  o.src = lst;
+const setSrc = (o, src, scope, shared) => {
+  o.src = {
+    src: src,
+    scope: scope,
+    shared: shared ? true : false,
+  };
   return o;
 };
 
@@ -16,12 +20,19 @@ const getEmoteData = async() => {
 
     console.log(bttvGlobal, bttvChannel);
 
-    const bttvEmoteData = bttvGlobal.data
-      .map(a => setSrc(a, ["bttv", "global"]))
-      .concat(bttvChannel.data.channelEmotes
-        .map(a => setSrc(a, ["bttv", "channel", "channel"]))
-        .concat(bttvChannel.data.sharedEmotes
-          .map(a => setSrc(a, ["bttv", "channel", "shared"])))); // always has id,code,imageType
+    const bttvEmoteData = { // always has id,code,imageType
+      global: bttvGlobal.data.map(a => setSrc(a, "bttv", "global", false)),
+      channel: {
+        channel: bttvChannel.data.channelEmotes
+          .map(a => setSrc(a, "bttv", "channel", false)),
+        shared: bttvChannel.data.sharedEmotes
+          .map(a => setSrc(a, "bttv", "channel", true))
+      },
+      toArr: function() {
+        return this.global.concat(this.channel.channel,
+          this.channel.shared);
+      }
+    };
     console.log("bttv:", bttvEmoteData);
 
     const ffzGlobal = await axios.get(
@@ -31,31 +42,22 @@ const getEmoteData = async() => {
       "https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938"
     );
 
-    const ffzEmoteData = ffzGlobal.data
-      .map(a => setSrc(a, ["ffz", "global"]))
-      .concat(ffzChannel.data
-        .map(a => setSrc(a, ["ffz", "channel"]))); // always has id,code,imageType, and `images` field with links to source img
+    const ffzEmoteData = { // always has id,code,imageType, and `images` field with links to source img
+      global: ffzGlobal.data.map(a => setSrc(a, "ffz", "global", false)),
+      channel: ffzChannel.data.map(a => setSrc(a, "ffz", "channel", false)),
+      toArr: function() { return this.global.concat(this.channel); }
+    };
     console.log("ffz:", ffzEmoteData);
     return {
       bttv: bttvEmoteData,
       ffz: ffzEmoteData,
+      toArr: function() { return this.bttv.toArr().concat(this.ffz.toArr()); }
     };
   } catch (err) {
     console.error(err);
     return null;
   }
 };
-
-// const wordEmote = (word, emoteData) => {
-//   const l = emoteData.bttv
-//     .filter(w => w.code === word)
-//     .concat(emoteData.ffz.filter(w => w.code === word));
-//   if (l.length > 0) {
-//     return l[0];
-//   } else {
-//     return null;
-//   }
-// };
 
 const emoteLinks = emote => {
   if (emote.images != null) {
@@ -72,12 +74,8 @@ const emoteLinks = emote => {
 const emoteMap = emoteData => {
   const m = new Map();
 
-  emoteData.bttv.forEach(e => {
+  emoteData.toArr().forEach(e => {
     e.images = emoteLinks(e);
-    m.set(e.code, e);
-  });
-  emoteData.ffz.forEach(e => {
-    // e.images = emoteLinks(e)
     m.set(e.code, e);
   });
 
@@ -91,9 +89,12 @@ const emotes = async() => {
 };
 
 const emoteHTML = emoteObj => {
-  return `<img class="emoji yt-formatted-string\
-style-scope yt-live-chat-text-message-renderer" src="${emoteObj.images["1x"]}"\
-alt="${emoteObj.code}" shared-tooltip-text="${emoteObj.code}">`;
+  return "<img style=\"width:auto;\""
+       + " class=\"bttv-emote emoji yt-formatted-string"
+       + " style-scope yt-live-chat-text-message-renderer\""
+       + ` src="${emoteObj.images["1x"]}"`
+       + ` alt="${emoteObj.code}"`
+       + ` shared-tooltip-text="${emoteObj.code}">`;
 };
 
 module.exports = { emotes, emoteHTML };

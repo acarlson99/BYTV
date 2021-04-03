@@ -35,10 +35,11 @@
       If live chat message is deleted then grey out msg (or smth) instead of deleting it from chat history
       - [ ] Intercept `delmsg` from server
       - [ ] Modify chat message (grey out or smth) instead of deleting it entirely
-  - [-] Misc [1/3]
+  - [-] Optimization [1/4]
     - [X] Use JQuery instead of yucky `getElementsByClassName` functions
+    - [ ] Only update chat elems in chatframe, not offscreen elems
     - [ ] Update chatframe emotes only when chatframe modified
-	- [ ] Fix how chatframe HTML is updated. Could be much better
+    - [ ] Fix how chatframe HTML is updated. Could be much better
   - [ ] Deploy [0/2]
     - [ ] Create Chrome store acct (call it OrcaDev or some shit)
     - [ ] Update out manifest.json
