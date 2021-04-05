@@ -40,9 +40,10 @@
     - [ ] Only update chat elems in chatframe, not offscreen elems
     - [ ] Update chatframe emotes only when chatframe modified
     - [ ] Fix how chatframe HTML is updated. Could be much better
-  - [ ] Deploy [0/2]
+  - [ ] Deploy [0/3]
     - [ ] Create Chrome store acct (call it OrcaDev or some shit)
     - [ ] Update out manifest.json
+    - [ ] Make build script build for Chrome && Firefox
 * Endpoints
 ** Documentation
 *** https://api.betterttv.net
@@ -83,9 +84,9 @@
   - /assets/logos/mascot.png
 *** https://www.youtube.com
   - /youtubei/v1/live_chat/get_live_chat?key=key
-	- update live chat
+    - update live chat
     - returns JSON. [[file:yt-chat-messages.json][example]]
-	- `addChatItemAction.item.id` and `markChatItemAsDeletedAction.targetItemId` fields correspond to HTML id
+    - `addChatItemAction.item.id` and `markChatItemAsDeletedAction.targetItemId` fields correspond to HTML id
 ** Examples
 *** BTTV
 #+begin_src shell :results file :file bttv-global.json

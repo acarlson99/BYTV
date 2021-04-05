@@ -7,7 +7,10 @@ async function sendMessage(msg) {
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       if (tabs === undefined || tabs.length < 1) return;
       const activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, msg);
+      if (activeTab && activeTab.url
+          && activeTab.url.match(/^(https?:\/\/)?(www\.)?youtube\.com/)) {
+        chrome.tabs.sendMessage(activeTab.id, msg);
+      }
     });
   } catch (err) {}
 }
