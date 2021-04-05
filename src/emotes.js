@@ -18,13 +18,16 @@ const getEmoteData = async() => {
       "https://api.betterttv.net/3/cached/users/twitch/71092938"
     );
 
+    console.log("bttv global", bttvGlobal);
+    console.log("bttv channel", bttvChannel);
+
     const bttvEmoteData = { // always has id,code,imageType
-      global: bttvGlobal.data.map(a => setSrc(a, "bttv", "global", false)),
+      global: bttvGlobal.data.map(a => setSrc(a, "BetterTTV", "Global", false)),
       channel: {
         channel: bttvChannel.data.channelEmotes
-          .map(a => setSrc(a, "bttv", "channel", false)),
+          .map(a => setSrc(a, "BetterTTV", "Channel", false)),
         shared: bttvChannel.data.sharedEmotes
-          .map(a => setSrc(a, "bttv", "channel", true))
+          .map(a => setSrc(a, "BetterTTV", "Channel", true))
       },
       toArr: function() {
         return this.global.concat(this.channel.channel,
@@ -40,9 +43,14 @@ const getEmoteData = async() => {
       "https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938"
     );
 
+    console.log("ffz global", ffzGlobal);
+    console.log("ffz channel", ffzChannel);
+
     const ffzEmoteData = { // always has id,code,imageType, and `images` field with links to source img
-      global: ffzGlobal.data.map(a => setSrc(a, "ffz", "global", false)),
-      channel: ffzChannel.data.map(a => setSrc(a, "ffz", "channel", false)),
+      global: ffzGlobal.data
+        .map(a => setSrc(a, "FrankerFaceZ", "Global", false)),
+      channel: ffzChannel.data
+        .map(a => setSrc(a, "FrankerFaceZ", "Channel", false)),
       toArr: function() { return this.global.concat(this.channel); }
     };
     console.log("ffz:", ffzEmoteData);
@@ -95,4 +103,33 @@ const emoteHTML = emoteObj => {
        + ` shared-tooltip-text="${emoteObj.code}">`;
 };
 
-module.exports = { emotes, emoteHTML };
+/*
+** bttv.channel.channel = "xqcow"; BetterTTV Channel Emotes
+** bttv.channel.shared = emote.user.name; BetterTTV Channel Emotes
+** bttv.global = BetterTTV Global Emotes
+** ffz.channel = emote.user.name; FrankerFaceZ Channel Emotes
+** ffz.global = emote.user.name ;FrankerFaceZ Global Emotes
+*/
+const emoteSrc = emoteObj => {
+  // user?
+  // <br>?
+  // src
+  let s = "";
+  if (emoteObj.user) {
+    s = `Channel: ${emoteObj.user.displayName}
+<br>
+`;
+  }
+  return s + `${emoteObj.src.src} ${emoteObj.src.scope} emote`;
+};
+
+const emoteTooltip = emoteObj => { // TODO: display this when emote hovered
+  // surround emote HTML in div that does nothing
+  return `<div style="display: none;">
+${emoteObj.code}
+<br>
+${emoteSrc(emoteObj)}
+</div>`;
+};
+
+module.exports = { emotes, emoteHTML, emoteTooltip };
