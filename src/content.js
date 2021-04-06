@@ -3,6 +3,8 @@ const { emotes, emoteHTML } = require("./emotes.js");
 
 let emoteMap = new Map();
 
+const bttvUpdatedContainer = "bttv-updated-container";
+
 const logErr = (...args) => {
   console.log("BYTV log:", ...args);
 };
@@ -30,6 +32,9 @@ const binarySearchArr = (arr, f) => {
   }
   return mid;
 };
+
+// document.getElementsByTagName("iframe").chatframe.contentDocument.getElementById("CjkKGkNNSFBqY3JlNk84Q0ZTTTByUVlkeEpFQmR3EhtDUGZVM2ZMZDZPOENGYUZGVEFnZE5GRU44QTE%3D")
+// <yt-live-chat-text-message-renderer class=​"style-scope yt-live-chat-item-list-renderer" id=​"CjkKGkNNSFBqY3JlNk84Q0ZTTTByUVlkeEpFQmR3EhtDUGZVM2ZMZDZPOENGYUZGVEFnZE5GRU44QTE%3D" author-is-owner author-type=​"owner" has-inline-action-buttons=​"3">​…​</yt-live-chat-text-message-renderer>
 
 const updateChatframe = () => {
   const chatframe = $("#chatframe")[0];
@@ -61,6 +66,11 @@ const updateChatframe = () => {
       const p = msg
         .getElementsByClassName("yt-live-chat-text-message-renderer");
 
+      // if already updated, skip
+      if (p.message.classList.contains(bttvUpdatedContainer)) { // THIS
+        continue;
+      }
+
       // update msg HTML
       const s = p.message.innerHTML.split(/[<>]/); // TODO: change this later
       for (let j = 0; j < s.length; j++) {
@@ -81,6 +91,7 @@ const updateChatframe = () => {
         }
       }
       const updatedHTML = s.join("");
+      p.message.classList.add(bttvUpdatedContainer); // THIS
       if (updatedHTML === p.message.innerHTML) {
         continue;
       }
@@ -97,6 +108,8 @@ chrome.runtime.onMessage.addListener(request => {
     try {
       updateChatframe();
     } catch (err) {}
+  } else if (request.message === "chat update") {
+    console.log("RECEIVED DATA", request.data);
   }
 });
 

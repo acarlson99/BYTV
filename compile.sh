@@ -8,6 +8,10 @@ cp $(readlink -f ./icon.png) $CHROME/
 cp $(readlink -f ./manifest.json) $CHROME/
 npx browserify src/content.js -o $CHROME/content.js
 npx browserify src/background.js -o $CHROME/background.js
+# npx browserify src/devtools.js -o $CHROME/devtools.js
+cp src/devtools.js src/panel.js $CHROME
+
+cp src/*.html $CHROME
 
 # modify compiled chrome API calls for firefox
 mkdir -p $FIREFOX
