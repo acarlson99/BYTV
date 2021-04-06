@@ -3,8 +3,6 @@ const { emotes, emoteHTML } = require("./emotes.js");
 
 let emoteMap = new Map();
 
-const bttvUpdatedContainer = "bttv-updated-container";
-
 const logErr = (...args) => {
   console.log("BYTV log:", ...args);
 };
@@ -60,11 +58,6 @@ const updateChatframe = () => {
         continue;
       }
 
-      // if already updated, skip
-      if (msg.classList.contains(bttvUpdatedContainer)) {
-        continue;
-      }
-
       const p = msg
         .getElementsByClassName("yt-live-chat-text-message-renderer");
 
@@ -74,7 +67,7 @@ const updateChatframe = () => {
         if (j % 2 === 0) {
           // not HTML element; replace words with emotes
           s[j] = s[j].replace(/(\s*)([^\s]+)(\s*)/g,
-            (a, space1, str, space2) => {
+            (wholeMatch, space1, str, space2) => {
               const emote = emoteMap.get(fixHTMLString(str));
               if (emote) {
                 return space1 + emoteHTML(emote) + space2;
@@ -88,7 +81,6 @@ const updateChatframe = () => {
         }
       }
       const updatedHTML = s.join("");
-      msg.classList.add(bttvUpdatedContainer);
       if (updatedHTML === p.message.innerHTML) {
         continue;
       }
@@ -108,19 +100,19 @@ chrome.runtime.onMessage.addListener(request => {
   }
 });
 
-const changeLogo = async img => {
-  try {
-    console.log(img);
+// const changeLogo = async img => {
+//   try {
+//     console.log(img);
 
-    $("#logo-icon").html(
-      '<img id="logo-icon" class="style-scope ytd-topbar-logo-renderer" src=' +
-        img +
-        " />"
-    );
-  } catch (err) {
-    console.error(err);
-  }
-};
+//     $("#logo-icon").html(
+//       '<img id="logo-icon" class="style-scope ytd-topbar-logo-renderer" src=' +
+//         img +
+//         " />"
+//     );
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
 const updateEmotes = async() => {
   const m = await emotes();

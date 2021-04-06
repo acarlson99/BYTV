@@ -1,4 +1,6 @@
 /build/
+/build-firefox/
+/build-chrome/
 /node_modules/
 /build.crx
 /build.pem

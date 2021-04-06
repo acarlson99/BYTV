@@ -1,5 +1,3 @@
-const axios = require("axios");
-
 const setSrc = (o, src, scope, shared) => {
   o.src = {
     src: src,
@@ -11,22 +9,23 @@ const setSrc = (o, src, scope, shared) => {
 
 const getEmoteData = async() => {
   try {
-    const bttvGlobal = await axios.get(
+    const bttvGlobal = await fetch(
       "https://api.betterttv.net/3/cached/emotes/global"
-    );
-    const bttvChannel = await axios.get(
+    ).then(a=> {return a.json();});
+
+    const bttvChannel = await fetch(
       "https://api.betterttv.net/3/cached/users/twitch/71092938"
-    );
+    ).then(a=> {return a.json();});
 
     console.log("bttv global", bttvGlobal);
     console.log("bttv channel", bttvChannel);
 
     const bttvEmoteData = { // always has id,code,imageType
-      global: bttvGlobal.data.map(a => setSrc(a, "BetterTTV", "Global", false)),
+      global: bttvGlobal.map(a => setSrc(a, "BetterTTV", "Global", false)),
       channel: {
-        channel: bttvChannel.data.channelEmotes
+        channel: bttvChannel.channelEmotes
           .map(a => setSrc(a, "BetterTTV", "Channel", false)),
-        shared: bttvChannel.data.sharedEmotes
+        shared: bttvChannel.sharedEmotes
           .map(a => setSrc(a, "BetterTTV", "Channel", true))
       },
       toArr: function() {
@@ -36,20 +35,20 @@ const getEmoteData = async() => {
     };
     console.log("bttv:", bttvEmoteData);
 
-    const ffzGlobal = await axios.get(
+    const ffzGlobal = await fetch(
       "https://api.betterttv.net/3/cached/frankerfacez/emotes/global"
-    );
-    const ffzChannel = await axios.get(
+    ).then(a => a.json());
+    const ffzChannel = await fetch(
       "https://api.betterttv.net/3/cached/frankerfacez/users/twitch/71092938"
-    );
+    ).then(a => a.json());
 
     console.log("ffz global", ffzGlobal);
     console.log("ffz channel", ffzChannel);
 
     const ffzEmoteData = { // always has id,code,imageType, and `images` field with links to source img
-      global: ffzGlobal.data
+      global: ffzGlobal
         .map(a => setSrc(a, "FrankerFaceZ", "Global", false)),
-      channel: ffzChannel.data
+      channel: ffzChannel
         .map(a => setSrc(a, "FrankerFaceZ", "Channel", false)),
       toArr: function() { return this.global.concat(this.channel); }
     };
@@ -94,15 +93,6 @@ const emotes = async() => {
   return emoteMap(e);
 };
 
-const emoteHTML = emoteObj => {
-  return "<img style=\"width:auto;\""
-       + " class=\"bttv-emote emoji yt-formatted-string"
-       + " style-scope yt-live-chat-text-message-renderer\""
-       + ` src="${emoteObj.images["1x"]}"`
-       + ` alt="${emoteObj.code}"`
-       + ` shared-tooltip-text="${emoteObj.code}">`;
-};
-
 /*
 ** bttv.channel.channel = "xqcow"; BetterTTV Channel Emotes
 ** bttv.channel.shared = emote.user.name; BetterTTV Channel Emotes
@@ -110,26 +100,37 @@ const emoteHTML = emoteObj => {
 ** ffz.channel = emote.user.name; FrankerFaceZ Channel Emotes
 ** ffz.global = emote.user.name ;FrankerFaceZ Global Emotes
 */
-const emoteSrc = emoteObj => {
-  // user?
-  // <br>?
-  // src
-  let s = "";
-  if (emoteObj.user) {
-    s = `Channel: ${emoteObj.user.displayName}
-<br>
-`;
-  }
-  return s + `${emoteObj.src.src} ${emoteObj.src.scope} emote`;
+// const emoteSrc = emoteObj => {
+//   // user?
+//   // <br>?
+//   // src
+//   let s = "";
+//   if (emoteObj.user) {
+//     s = `Channel: ${emoteObj.user.displayName}
+// <br>
+// `;
+//   }
+//   return s + `${emoteObj.src.src} ${emoteObj.src.scope} emote`;
+// };
+
+// const emoteTooltip = emoteObj => {
+//   return "<div class=\"bttv-emote-tooltip\" style=\"display:none; overflow:visible;\">"
+//        + `${emoteObj.code}`
+//        + "<br>"
+//        + `${emoteSrc(emoteObj)}`
+//        + "</div>";
+// };
+
+const emoteImg = emoteObj => {
+  return '<img style="width:auto; overflow:visible;"'
+    + " class=\"bttv-emote emoji yt-formatted-string"
+    + " style-scope yt-live-chat-text-message-renderer\""
+    + ` src="${emoteObj.images["1x"]}"`
+    + ` alt="${emoteObj.code}"`
+    + ` shared-tooltip-text="${emoteObj.code}">`;
 };
 
-const emoteTooltip = emoteObj => { // TODO: display this when emote hovered
-  // surround emote HTML in div that does nothing
-  return `<div style="display: none;">
-${emoteObj.code}
-<br>
-${emoteSrc(emoteObj)}
-</div>`;
-};
+// TODO: add `emoteTooltip() and display on hover
+const emoteHTML = emoteObj => emoteImg(emoteObj);
 
-module.exports = { emotes, emoteHTML, emoteTooltip };
+module.exports = { emotes, emoteHTML };
