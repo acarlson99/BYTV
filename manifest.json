@@ -20,6 +20,7 @@
 		"default_icon": "icon.png"
 	},
 	"permissions": [
+		"https://api.betterttv.net/*",
 		"*://www.youtube.com/*",
 		"*://youtube.com/*"
 	]
