@@ -1,5 +1,5 @@
 chrome.runtime.onConnect.addListener(function (port) {
-  console.log("AAAAAAAA")
+  console.log("Background new port connection")
   // Listen for message from the panel and pass it on to the content
   port.onMessage.addListener(function (message) {
     // Request a tab for sending needed information
@@ -7,7 +7,6 @@ chrome.runtime.onConnect.addListener(function (port) {
       // Send message to content script
       // if (tabs) {
         // chrome.tabs.sendMessage(tabs[0].id, { message: "chat update", data: message });
-    console.log("MSG", message)
     sendMessage({ message: "chat update", data: message })
       // }
     });

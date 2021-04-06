@@ -109,7 +109,13 @@ chrome.runtime.onMessage.addListener(request => {
       updateChatframe();
     } catch (err) {}
   } else if (request.message === "chat update") {
-    console.log("RECEIVED DATA", request.data);
+    // TODO: check if correct URL
+    // NOTE: may have to open fresh tab in YT for it to work idk why
+    console.log(request.data)
+    console.log("RECEIVED DATA", JSON.parse(request.data));
+    // request.data.getContent((content) => {
+    //   console.log("Content: ", content);
+    // });
   }
 });
 

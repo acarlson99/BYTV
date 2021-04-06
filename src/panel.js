@@ -1,5 +1,5 @@
 window.onload = function() {
-  var port = chrome.runtime.connect({name: "Eval in context"});
+  var port = chrome.runtime.connect({name: "BYTV Network Request"});
   // Add the eval'd response to the console when the background page sends it back
   port.onMessage.addListener(function (msg) {
     addToConsole(msg, false);
@@ -9,7 +9,8 @@ window.onload = function() {
     try {
       // Ask the background page to ask the content script to inject a script
       // into the DOM that can finally eval `s` in the right context.
-      port.postMessage(req);
+      if (req.request.url.match(/^(https?:\/\/)?(www\.)?youtube\.com/))
+        req.getContent((s) => port.postMessage(s));
       // Outputting `s` to the log in the panel works here,
       // but console.log() does nothing, and I can't observe any
       // results of port.postMessage

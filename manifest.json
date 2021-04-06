@@ -23,5 +23,6 @@
 		"https://api.betterttv.net/*",
 		"*://www.youtube.com/*",
 		"*://youtube.com/*"
-	]
+	],
+	"devtools_page": "devtools.html"
 }
