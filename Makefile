@@ -16,6 +16,11 @@ clean:
 
 re: clean all
 
+format:
+	npx eslint src/*.js --fix
+
+fmt: format
+
 # CHROME
 chrome: $(CHROME_FILES)
 
