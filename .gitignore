@@ -4,3 +4,9 @@
 /node_modules/
 /build.crx
 /build.pem
+/chrome.xpi
+/firefox.xpi
+/build-chrome
+/build-firefox
+/*.zip
+/web-ext-artifacts
