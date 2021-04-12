@@ -42,6 +42,10 @@ $(CHROME_DIR)manifest.json:
 $(addprefix $(CHROME_DIR), %.js): $(addprefix $(SRC), %.js)
 	npx browserify -o $@ $<
 
+## devtools
+$(addprefix $(CHROME_DIR), %): $(addprefix $(SRC)devtools/, %)
+	cp $< $@
+
 ## package
 $(CHROME_XPI): chrome
 	@echo ">>> Packaging $@"
@@ -49,7 +53,7 @@ $(CHROME_XPI): chrome
 
 # FIREFOX
 firefox: $(FIREFOX_DEPS)
-	sed -i -s 's/chrome\./browser./' $(FIREFOX_DIR)/*.js
+	sed -i -s 's/chrome\./browser./' $(FIREFOX_DIR)*.js
 
 firefox-pkg: $(FIREFOX_XPI)
 
@@ -63,16 +67,15 @@ $(FIREFOX_DIR)manifest.json:
 $(addprefix $(FIREFOX_DIR), %.js): $(addprefix $(SRC), %.js)
 	npx browserify -o $@ $<
 
+## devtools
+$(addprefix $(FIREFOX_DIR), %): $(addprefix $(SRC)devtools/, %)
+	cp $< $@
+
 ## package
 $(FIREFOX_XPI): firefox
 	@echo ">>> Packaging $@"
 	zip -1 -r -j $(FIREFOX_XPI) $(FIREFOX_DIR)*
 
 # OTHER
-## copy devtools
-$(addprefix $(CHROME_DIR), $(DEVTOOLS)) $(addprefix $(FIREFOX_DIR), $(DEVTOOLS)): $(addprefix $(SRC)devtools/, $(DEVTOOLS))
-	cp $< $@
-
-## src dirs
 $(CHROME_DIR) $(FIREFOX_DIR):
 	mkdir -p $@
