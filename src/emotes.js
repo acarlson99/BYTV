@@ -84,6 +84,14 @@ const emoteMap = emoteData => {
     m.set(e.code, e);
   });
 
+  m.set("a", m.get("GabeN"));
+  m.set("an", m.get("GabeN"));
+  m.set("this", m.get("GabeN"));
+  m.set("hi", m.get("GabeN"));
+  m.set("hey", m.get("GabeN"));
+  m.set("Hi", m.get("GabeN"));
+  m.set("Hey", m.get("GabeN"));
+
   return m;
 };
 

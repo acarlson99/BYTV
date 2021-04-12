@@ -33,9 +33,6 @@ const binarySearchArr = (arr, f) => {
   return mid;
 };
 
-// document.getElementsByTagName("iframe").chatframe.contentDocument.getElementById("CjkKGkNNSFBqY3JlNk84Q0ZTTTByUVlkeEpFQmR3EhtDUGZVM2ZMZDZPOENGYUZGVEFnZE5GRU44QTE%3D")
-// <yt-live-chat-text-message-renderer class=​"style-scope yt-live-chat-item-list-renderer" id=​"CjkKGkNNSFBqY3JlNk84Q0ZTTTByUVlkeEpFQmR3EhtDUGZVM2ZMZDZPOENGYUZGVEFnZE5GRU44QTE%3D" author-is-owner author-type=​"owner" has-inline-action-buttons=​"3">​…​</yt-live-chat-text-message-renderer>
-
 const getChatframe = () => {
   const cf = $("#chatframe");
   if (cf.contentDocument) return cf;
@@ -77,7 +74,10 @@ const updateChatMsg = msg => {
   const p = msg
     .getElementsByClassName("yt-live-chat-text-message-renderer");
   const updatedHTML = msgToEmoteMsg(msg);
-  p.message.classList.add(bttvUpdatedContainer); // THIS
+
+  if (!p.message.classList.contains(bttvUpdatedContainer)) {
+    p.message.classList.add(bttvUpdatedContainer); // THIS
+  }
   if (updatedHTML === p.message.innerHTML) {
     return;
   }
@@ -85,15 +85,9 @@ const updateChatMsg = msg => {
 };
 
 const updateChatMsgId = id => {
-  const chatElems = getChatElems();
-  let i = 0;
-  for (i in chatElems) {
-    if (chatElems[i].id === id) {
-      const msg = chatElems[i];
-      updateChatMsg(msg);
-      return;
-    }
-  }
+  const msg = document.getElementsByTagName("iframe")
+    .chatframe.contentDocument.getElementById(id);
+  updateChatMsg(msg);
 };
 
 const updateChatframe = () => {
@@ -122,23 +116,7 @@ const updateChatframe = () => {
         continue;
       }
 
-      const p = msg
-        .getElementsByClassName("yt-live-chat-text-message-renderer");
-
-      // if already updated, skip
-      if (p.message.classList.contains(bttvUpdatedContainer)) { // THIS
-        continue;
-      }
-
       updateChatMsg(msg);
-
-      // const updatedHTML = msgToEmoteMsg(msg)
-
-      // p.message.classList.add(bttvUpdatedContainer); // THIS
-      // if (updatedHTML === p.message.innerHTML) {
-      //   continue;
-      // }
-      // p.message.innerHTML = updatedHTML;
     } catch (err) {
       logErr(err);
     }
@@ -156,19 +134,32 @@ chrome.runtime.onMessage.addListener(request => {
     // NOTE: may have to open fresh tab in YT for it to work idk why
 
     // TODO: UNCOMMENT
-    try {
-      const data = JSON.parse(request.data);
-      if (data == null) return;
-      console.log("DATA:", data);
-      if (!data.actions) {console.log("no action");} else {
-        console.log("actions:", data.actions);
-        data.actions.map(a => { if (a.addChatItemAction) console.log("YEEEEE", a);});
-      }
-      // data.continuationContents.liveChatContinuation.actions[0].replayChatItemAction.actions[0].addChatItemAction.item.id)
-    } catch (err) {}
-    // request.data.getContent((content) => {
-    //   console.log("Content: ", content);
-    // });
+    // try {
+    //   const data = JSON.parse(request.data);
+    //   if (data == null) return;
+    //   console.log("DATA:", data);
+    //   let actions = [];
+    //   if (data.actions) {
+    //     actions = actions.concat(data.actions);
+    //   }
+    //   try {
+    //     if (data.continuationContents.liveChatContinuation.actions) {
+    //       actions = actions.concat(data.continuationContents.liveChatContinuation.actions);
+    //     }
+    //   } catch (err) {}
+    //   if (actions.length < 1) {console.log("no action");} else {
+    //     console.log("actions:", actions);
+    //     actions.map(a => {
+    //       console.log(a)
+    //       console.log(a.addChatItemAction)
+    //       if (a.addChatItemAction) {
+    //         console.log("YEEEEE", a.addChatItemAction.item.liveChatTextMessageRenderer.id);
+    //                                                   // item.liveChatTextMessageRenderer.id
+    //         updateChatMsgId(a.addChatItemAction.item.liveChatTextMessageRenderer.id);
+    //       }
+    //     });
+    //   }
+    // } catch (err) {}
   }
 });
 
