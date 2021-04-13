@@ -1,6 +1,6 @@
 const $ = require("jquery");
-const { emoteHTML } = require("./emote.js");
-const { binarySearchArr, logErr } = require("./util.js");
+const { emoteHTML } = require("./emote");
+const { binarySearchArr, logErr } = require("./util");
 
 const bttvUpdatedContainer = "bttv-updated-container";
 

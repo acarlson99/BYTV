@@ -1,5 +1,5 @@
-const { emotes } = require("./emote.js");
-const { updateChatframe } = require("./chat.js");
+const { emotes } = require("./emote");
+const { updateChatframe } = require("./chat");
 
 let emoteMap = new Map();
 
