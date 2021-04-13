@@ -3,12 +3,11 @@ FIREFOX_DIR = build-firefox/
 SRC = src/
 BACKGROUND = background.js
 CONTENT = content.js
-DEVTOOLS = devtools.html devtools.js panel.html panel.js
 CHROME_DEPS = $(CHROME_DIR)                                                     \
-              $(addprefix $(CHROME_DIR), $(BACKGROUND) $(CONTENT) $(DEVTOOLS)   \
+              $(addprefix $(CHROME_DIR), $(BACKGROUND) $(CONTENT)               \
                                          icon.png manifest.json)
 FIREFOX_DEPS = $(FIREFOX_DIR)                                                   \
-               $(addprefix $(FIREFOX_DIR), $(BACKGROUND) $(CONTENT) $(DEVTOOLS) \
+               $(addprefix $(FIREFOX_DIR), $(BACKGROUND) $(CONTENT)             \
                                            icon.png manifest.json)
 CHROME_XPI = chrome.xpi
 FIREFOX_XPI = firefox.xpi
@@ -42,10 +41,6 @@ $(CHROME_DIR)manifest.json:
 $(addprefix $(CHROME_DIR), %.js): $(addprefix $(SRC), %.js)
 	npx browserify -o $@ $<
 
-## devtools
-$(addprefix $(CHROME_DIR), %): $(addprefix $(SRC)devtools/, %)
-	cp $< $@
-
 ## package
 $(CHROME_XPI): chrome
 	@echo ">>> Packaging $@"
@@ -66,10 +61,6 @@ $(FIREFOX_DIR)manifest.json:
 ## compile
 $(addprefix $(FIREFOX_DIR), %.js): $(addprefix $(SRC), %.js)
 	npx browserify -o $@ $<
-
-## devtools
-$(addprefix $(FIREFOX_DIR), %): $(addprefix $(SRC)devtools/, %)
-	cp $< $@
 
 ## package
 $(FIREFOX_XPI): firefox

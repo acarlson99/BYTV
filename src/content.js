@@ -129,37 +129,6 @@ chrome.runtime.onMessage.addListener(request => {
     try {
       updateChatframe();
     } catch (err) {}
-  } else if (request.message === "chat update") {
-    // TODO: check if correct URL
-    // NOTE: may have to open fresh tab in YT for it to work idk why
-
-    // TODO: UNCOMMENT
-    // try {
-    //   const data = JSON.parse(request.data);
-    //   if (data == null) return;
-    //   console.log("DATA:", data);
-    //   let actions = [];
-    //   if (data.actions) {
-    //     actions = actions.concat(data.actions);
-    //   }
-    //   try {
-    //     if (data.continuationContents.liveChatContinuation.actions) {
-    //       actions = actions.concat(data.continuationContents.liveChatContinuation.actions);
-    //     }
-    //   } catch (err) {}
-    //   if (actions.length < 1) {console.log("no action");} else {
-    //     console.log("actions:", actions);
-    //     actions.map(a => {
-    //       console.log(a)
-    //       console.log(a.addChatItemAction)
-    //       if (a.addChatItemAction) {
-    //         console.log("YEEEEE", a.addChatItemAction.item.liveChatTextMessageRenderer.id);
-    //                                                   // item.liveChatTextMessageRenderer.id
-    //         updateChatMsgId(a.addChatItemAction.item.liveChatTextMessageRenderer.id);
-    //       }
-    //     });
-    //   }
-    // } catch (err) {}
   }
 });
 
