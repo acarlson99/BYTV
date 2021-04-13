@@ -12,6 +12,7 @@ FIREFOX_DEPS = $(FIREFOX_DIR)                                                   
                                            icon.png manifest.json)
 CHROME_XPI = chrome.xpi
 FIREFOX_XPI = firefox.xpi
+ZIP = src.zip
 
 # Top level rules
 all: chrome-pkg firefox-pkg
@@ -26,6 +27,11 @@ format:
 	npx eslint src/*.js --fix
 
 fmt: format
+
+## zip src code (for Firefox add-on verification)
+src-zip:
+	$(RM) $(ZIP)
+	zip -r $(ZIP) package*.json README.md icon.png manifest.json src/ Makefile
 
 # CHROME
 chrome: $(CHROME_DEPS)

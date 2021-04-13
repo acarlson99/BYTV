@@ -13,10 +13,22 @@ See `package.json` for version info
 ## Build
 
 ```
+# install npm deps
 npm install
-make
+# build
+make chrome     # create chrome.xpi
+# or
+make firefox    # create firefox.xpi
+# or
+make all        # create chrome.xpi && firefox.xpi
 ```
 
 ## Install
 
-`chrome://extensions` -> enable dev mode (if disabled) -> load unpacked
+### Chrome
+
+`chrome://extensions` -> enable dev mode (if disabled) -> load unpacked -> /extension/path/build-chrome/
+
+### Firefox
+
+`about:debugging#/runtime/this-firefox` -> Load Temporary Add-on -> /extension/path/build-firefox/manifest.json
