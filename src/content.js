@@ -7,10 +7,8 @@ let emoteMap = new Map();
 chrome.runtime.onMessage.addListener(request => {
   if (request.message === "update chatframe") {
     try {
-      if (emoteMap.size > 0) {updateChatframe(emoteMap);}
-    } catch (err) {
-      console.log(err);
-    }
+      if (emoteMap.size > 0) updateChatframe(emoteMap);
+    } catch (err) {}
   }
 });
 
@@ -29,7 +27,10 @@ chrome.runtime.onMessage.addListener(request => {
 // };
 
 const updateEmotes = async() => {
-  const m = await emotes();
+  let m = await emotes();
+  while (m.size < 1) {
+    m = await emotes();
+  }
   emoteMap = m;
 };
 
