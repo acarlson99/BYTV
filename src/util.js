@@ -22,4 +22,47 @@ const logErr = (...args) => {
   console.log("BYTV log:", ...args);
 };
 
-module.exports = { binarySearchArr, logErr };
+const traverseObj = (f, obj, ...path) => {
+  for (let i in path) {
+    i = Number(i); // fkme.js
+    const p = path[i];
+    switch (typeof p) {
+      case "function":
+        // recurse for all objs for which function `p` is true
+        for (const j in obj) {
+          try {
+            if (p(obj[j])) {
+              traverseObj(f, obj[j], ...path.slice(i + 1));
+            }
+          } catch (err) {}
+        }
+        return;
+      case "object":
+        // recurse for obj[j] for every value `j` in `p`
+        for (const j of p) {
+          if (obj[j]) {
+            try {
+              traverseObj(f, obj[j], ...path.slice(i + 1));
+            } catch (err) {}
+          }
+        }
+        return;
+      case "boolean":
+        if (p) {
+          for (const j in obj) {
+            try {
+              traverseObj(f, obj[j], ...path.slice(i + 1));
+            } catch (err) {}
+          }
+        }
+        return;
+      default:
+        obj = obj[p];
+    }
+  }
+  if (obj) {
+    f(obj);
+  }
+};
+
+module.exports = { binarySearchArr, logErr, traverseObj };
