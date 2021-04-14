@@ -22,6 +22,17 @@ const logErr = (...args) => {
   console.log("BYTV log:", ...args);
 };
 
+// call f(o) for every `o` matching path
+//
+// switch (typeof path)
+//   case "function":
+//     all children for whom `f` is true
+//   case "object":
+//     all values in obj
+//   case "boolean":
+//     everything if true, nothing if false
+//   default:
+//     string/int/other; just use as single non-branching index
 const traverseObj = (f, obj, ...path) => {
   for (let i in path) {
     i = Number(i); // fkme.js
