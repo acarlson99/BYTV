@@ -32,3 +32,9 @@ make all        # create chrome.xpi && firefox.xpi
 ### Firefox
 
 `about:debugging#/runtime/this-firefox` -> Load Temporary Add-on -> /extension/path/build-firefox/manifest.json
+
+## Usage
+
+Adds global BTTV/FFZ emotes to YT live chat
+
+For channel emotes the broadcaster must have Twitch acct linked in `channel/about` Links.  Note: link name must match regex `/twitch/i`
