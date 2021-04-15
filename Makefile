@@ -30,7 +30,7 @@ fmt: format
 ## zip src code (for Firefox add-on verification)
 src-zip:
 	$(RM) $(ZIP)
-	zip -r $(ZIP) package*.json README.md icon.png manifest.json src/ Makefile
+	zip -r $(ZIP) package*.json README.md icon.png manifest.json src/*.js Makefile
 
 # CHROME
 chrome: $(CHROME_DEPS)
