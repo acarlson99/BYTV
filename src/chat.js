@@ -1,6 +1,6 @@
 const $ = require("jquery");
 const { emoteHTML } = require("./emote");
-const { binarySearchArr, logErr } = require("./util");
+const { binarySearchArr, log } = require("./util");
 
 const bttvUpdatedContainer = "bttv-updated-container";
 
@@ -101,7 +101,7 @@ const updateChatframe = emoteMap => {
 
       updateChatMsg(emoteMap, msg);
     } catch (err) {
-      logErr(err);
+      log(err);
     }
   }
 };

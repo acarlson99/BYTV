@@ -18,7 +18,7 @@ const binarySearchArr = (arr, f) => {
   return mid;
 };
 
-const logErr = (...args) => {
+const log = (...args) => {
   console.log("BYTV log:", ...args);
 };
 
@@ -78,4 +78,4 @@ const traverseObj = (f, obj, ...path) => {
   }
 };
 
-module.exports = { binarySearchArr, logErr, traverseObj };
+module.exports = { binarySearchArr, log, traverseObj };

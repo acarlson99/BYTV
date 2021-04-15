@@ -17,8 +17,8 @@
 		"default_icon": "icon.png"
 	},
 	"permissions": [
+		"https://api.twitch.tv/kraken/users",
 		"https://api.betterttv.net/*",
-		"*://www.youtube.com/*",
-		"*://youtube.com/*"
+		"https://www.youtube.com/*"
 	]
 }
