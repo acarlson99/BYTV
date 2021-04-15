@@ -1,14 +1,13 @@
 CHROME_DIR = build-chrome/
 FIREFOX_DIR = build-firefox/
 SRC = src/
-BACKGROUND = background.js
 CONTENT = content.js
-CONTENT_SRC = chat.js emote.js util.js
-CHROME_DEPS = $(CHROME_DIR)                                                     \
-              $(addprefix $(CHROME_DIR), $(BACKGROUND) $(CONTENT)               \
+CONTENT_SRC = chat.js emote.js util.js yt-twitch.js
+CHROME_DEPS = $(CHROME_DIR)                                         \
+              $(addprefix $(CHROME_DIR), $(CONTENT)                 \
                                          icon.png manifest.json)
-FIREFOX_DEPS = $(FIREFOX_DIR)                                                   \
-               $(addprefix $(FIREFOX_DIR), $(BACKGROUND) $(CONTENT)             \
+FIREFOX_DEPS = $(FIREFOX_DIR)                                       \
+               $(addprefix $(FIREFOX_DIR), $(CONTENT)               \
                                            icon.png manifest.json)
 CHROME_XPI = chrome.xpi
 FIREFOX_XPI = firefox.xpi
@@ -48,9 +47,6 @@ $(CHROME_DIR)manifest.json:
 $(addprefix $(CHROME_DIR), $(CONTENT)): $(addprefix $(SRC), $(CONTENT)) $(addprefix $(SRC), $(CONTENT_SRC))
 	npx browserify -o $@ $<
 
-$(addprefix $(CHROME_DIR), $(BACKGROUND)): $(addprefix $(SRC), $(BACKGROUND))
-	npx browserify -o $@ $<
-
 ## package
 $(CHROME_XPI): chrome
 	@echo ">>> Packaging $@"
@@ -70,9 +66,6 @@ $(FIREFOX_DIR)manifest.json:
 
 ## compile
 $(addprefix $(FIREFOX_DIR), $(CONTENT)): $(addprefix $(SRC), $(CONTENT)) $(addprefix $(SRC), $(CONTENT_SRC))
-	npx browserify -o $@ $<
-
-$(addprefix $(FIREFOX_DIR), $(BACKGROUND)): $(addprefix $(SRC), $(BACKGROUND))
 	npx browserify -o $@ $<
 
 ## package

@@ -35,15 +35,17 @@ const logErr = (...args) => {
 //     string/int/other; just use as single non-branching index
 const traverseObj = (f, obj, ...path) => {
   for (let i in path) {
+    if (!Number.isFinite(Number(i))) continue;
     i = Number(i); // fkme.js
+
     const p = path[i];
     switch (typeof p) {
       case "function":
         // recurse for all objs for which function `p` is true
-        for (const j in obj) {
+        for (const j of obj) {
           try {
-            if (p(obj[j])) {
-              traverseObj(f, obj[j], ...path.slice(i + 1));
+            if (p(j)) {
+              traverseObj(f, j, ...path.slice(i + 1));
             }
           } catch (err) {}
         }
@@ -60,9 +62,9 @@ const traverseObj = (f, obj, ...path) => {
         return;
       case "boolean":
         if (p) {
-          for (const j in obj) {
+          for (const j of obj) {
             try {
-              traverseObj(f, obj[j], ...path.slice(i + 1));
+              traverseObj(f, j, ...path.slice(i + 1));
             } catch (err) {}
           }
         }

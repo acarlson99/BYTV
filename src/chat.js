@@ -9,14 +9,22 @@ const fixHTMLString = s => {
 };
 
 const getChatframe = () => {
-  const cf = $("#chatframe");
-  if (cf.contentDocument) return cf;
-  return cf[0];
+  try {
+    const cf = $("#chatframe");
+    if (cf.contentDocument) return cf;
+    return cf[0];
+  } catch (err) {
+    return null;
+  }
 };
 
 const getChatElems = () => {
-  return getChatframe().contentDocument
-    .getElementsByTagName("yt-live-chat-text-message-renderer");
+  try {
+    return getChatframe().contentDocument
+      .getElementsByTagName("yt-live-chat-text-message-renderer");
+  } catch (err) {
+    return null;
+  }
 };
 
 const msgToEmoteMsg = (emoteMap, msg) => {
@@ -67,7 +75,7 @@ const updateChatMsgId = (emoteMap, id) => {
 
 const updateChatframe = emoteMap => {
   const chatElems = getChatElems();
-  if (chatElems.length <= 0) {
+  if (!chatElems || chatElems.length <= 0) {
     return;
   }
 
