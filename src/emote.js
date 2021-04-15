@@ -1,3 +1,5 @@
+const { log } = require("./util");
+
 const setSrc = (o, src, scope, shared) => {
   o.src = {
     src: src,
@@ -9,6 +11,7 @@ const setSrc = (o, src, scope, shared) => {
 
 const getEmoteData = async id => {
   try {
+    log("ID:", id)
     const bttvGlobal = await fetch(
       "https://api.betterttv.net/3/cached/emotes/global"
     ).then(a => {
