@@ -11,17 +11,16 @@
   - [X] Figure out YouTube backend and messages sent from server to frontend
     - chat messages are a response to POST request to `/youtubei/v1/live_chat/get_live_chat?key=idksomekeyhere`
       - example [[file:yt-chat-request][request]] and [[file:yt-chat-response.json][response]]
-  - [-] Features (from BTTV extension pages) [0/7]
-    - [-] Extra emoticons - BetterTTV global and per-channel emotes [3/4]
+  - [-] Features (from BTTV extension pages) [2/7]
+    - [X] Extra emoticons - BetterTTV global and per-channel emotes [4/4]
       - [X] [[https://github.com/night/betterttv/blob/master/src/modules/emotes/emote.js#L18-L43][ToHTML function]] (display like chat emote)
       - [X] Update chat messages periodically
       - [X] Check message for keywords, query BTTV API for corresponding emote
-      - [ ] Fix update canary (removed because canary class prevented updating user chat info)
-    - [ ] Use correct BTTV ID to query emote endpoint [0/4]
-      - [ ] Check YT `about` page for linked Twitch channel
-      - [ ] Check YT name against BTTV
-      - [ ] Check YT `about` page for embedded Twitch username or BTTV ID
-      - [ ] Default to tyler1 or xqc or michaelreeves or disguisedtoast or some shit idk lmao
+      - [X] Fix update canary (removed because canary class prevented updating user chat info)
+    - [X] Use correct BTTV ID to query emote endpoint [3/3]
+      - [X] Check YT `about` page for linked Twitch channel
+      - [X] Check YT name against BTTV
+      - [X] Check YT `about` page for embedded Twitch username or BTTV ID
     - [ ] Extended emote menu ([[https://github.com/night/betterttv/blob/master/src/modules/emote_menu/index.js][example]])
     - [ ] Display emote info on hover
     - [ ] Username/Word/Phrase highlighting [0/2]
@@ -41,10 +40,10 @@
     - [X] Only update chat elems in chatframe, not offscreen elems
     - [ ] Update chatframe emotes only when chatframe modified
     - [ ] Fix how chatframe HTML is updated. Could be much better
-  - [ ] Deploy [0/4]
+  - [-] Deploy [1/4]
     - [ ] Create Chrome store acct (call it OrcaDev or some shit)
     - [ ] Update out manifest.json
-    - [ ] Make build script build for Chrome && Firefox
+    - [X] Make build script build for Chrome && Firefox
 	- [ ] Package for Firefox
 	  - [[https://extensionworkshop.com/documentation/publish/signing-and-distribution-overview/][signing && distributing]]
 	  - [[https://extensionworkshop.com/documentation/publish/package-your-extension/][how to package]]
