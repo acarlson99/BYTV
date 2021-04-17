@@ -10,11 +10,13 @@ FIREFOX_DEPS = $(FIREFOX_DIR)                                       \
                $(addprefix $(FIREFOX_DIR), $(CONTENT)               \
                                            icon.png manifest.json)
 CHROME_XPI = chrome.xpi
+CHROME_ZIP = chrome.zip
 FIREFOX_XPI = firefox.xpi
+FIREFOX_ZIP = firefox.zip
 ZIP = src.zip
 
 # Top level rules
-all: chrome-pkg firefox-pkg
+all: chrome-xpi chrome-zip firefox-xpi firefox-zip
 
 clean:
 	$(RM) -r $(CHROME_DIR) $(FIREFOX_DIR)
@@ -35,7 +37,9 @@ src-zip:
 # CHROME
 chrome: $(CHROME_DEPS)
 
-chrome-pkg: $(CHROME_XPI)
+chrome-xpi: $(CHROME_XPI)
+
+chrome-zip: $(CHROME_ZIP)
 
 $(CHROME_DIR)icon.png:
 	cp icon.png $(CHROME_DIR)
@@ -52,11 +56,17 @@ $(CHROME_XPI): chrome
 	@echo ">>> Packaging $@"
 	zip -1 -r -j $(CHROME_XPI) $(CHROME_DIR)*
 
+$(CHROME_ZIP): chrome
+	@echo ">>> Packaging $@"
+	zip -1 -r -j $(CHROME_ZIP) $(CHROME_DIR)*
+
 # FIREFOX
 firefox: $(FIREFOX_DEPS)
 	sed -i -s 's/chrome\./browser./' $(FIREFOX_DIR)*.js
 
-firefox-pkg: $(FIREFOX_XPI)
+firefox-xpi: $(FIREFOX_XPI)
+
+firefox-zip: $(FIREFOX_ZIP)
 
 $(FIREFOX_DIR)icon.png:
 	cp icon.png $(FIREFOX_DIR)
@@ -72,6 +82,10 @@ $(addprefix $(FIREFOX_DIR), $(CONTENT)): $(addprefix $(SRC), $(CONTENT)) $(addpr
 $(FIREFOX_XPI): firefox
 	@echo ">>> Packaging $@"
 	zip -1 -r -j $(FIREFOX_XPI) $(FIREFOX_DIR)*
+
+$(FIREFOX_ZIP): firefox
+	@echo ">>> Packaging $@"
+	zip -1 -r -j $(FIREFOX_ZIP) $(FIREFOX_DIR)*
 
 # OTHER
 $(CHROME_DIR) $(FIREFOX_DIR):
