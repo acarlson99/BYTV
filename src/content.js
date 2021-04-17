@@ -30,6 +30,7 @@ const updateEmotes = async() => {
   }
 
   twitchID = id;
+  log("Twitch ID:", id)
 
   const m = await emotes(id);
   log(m);

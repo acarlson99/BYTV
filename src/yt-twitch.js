@@ -65,7 +65,7 @@ const getTwitchUName = async() => {
 const usernameTwitchID = async uname => {
   const resp = await fetch(`https://api.twitch.tv/kraken/users?login=${uname}`, {
     headers: {
-      "Client-ID": "ekj09tcx24qymrl1wl5c6er2qjkpryz",
+      "Client-ID": "i7t08ggus3b5d71deab8k20rdzn5ez",
       "Accept": "application/vnd.twitchtv.v5+json"
     }
   }).then(a=> {return a.json();});
