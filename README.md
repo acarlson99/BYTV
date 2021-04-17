@@ -38,3 +38,53 @@ make all        # create chrome.xpi && firefox.xpi
 Adds global BTTV/FFZ emotes to YT live chat
 
 For channel emotes the broadcaster must have Twitch acct linked in `channel/about` Links.  Note: link name must match regex `/twitch/i`
+
+## Firefox Dev Info
+
+### Describe
+
+#### Description
+
+```
+BYTV adds features to YouTube (inspired by BetterTTV for Twitch)
+
+Adds new emotes to live chat
+
+All global FFZ+BTTV emotes currently supported.  To enable channel emotes link Twitch acct in channel/about links named "Twitch"
+
+Plan on adding more features
+```
+
+#### Categories
+
+```
+Games & Entertainment
+```
+
+### Additional Details
+
+#### Tags
+
+```
+bttv, bytv, live, livechat, livestream, twitch, youtube
+```
+
+### Technical Details
+
+#### Dev comments
+
+```html
+KNOWN BUGS/ISSUES:
+<ol>
+<li>Sending emotes can be buggy; may flip between emote and text</li>
+</ol>
+
+TODO:
+<ol>
+<li>Display emote info on hover</li>
+<li>Emote tab completion</li>
+<li>Extended emote menu</li>
+<li>Username/keyword highlighting</li>
+<li>Word/phrase blacklist</li>
+</ol>
+```
