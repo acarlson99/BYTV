@@ -1,7 +1,7 @@
 {
-	"name": "bytv",
+	"name": "BetterYTV",
 	"manifest_version": 2,
-	"version": "0.2",
+	"version": "1.0.1",
 	"content_scripts": [
 		{
 			"matches": [
@@ -22,6 +22,6 @@
 		"https://www.youtube.com/*"
 	],
   "icons": {
-    "48": "icon.png"
+    "192": "icon.png"
   }
 }
