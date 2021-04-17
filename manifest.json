@@ -20,5 +20,8 @@
 		"https://api.twitch.tv/kraken/users",
 		"https://api.betterttv.net/*",
 		"https://www.youtube.com/*"
-	]
+	],
+  "icons": {
+    "48": "icon.png"
+  }
 }

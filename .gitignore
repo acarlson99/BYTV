@@ -10,3 +10,4 @@
 /build-firefox
 /*.zip
 /web-ext-artifacts
+/src/.#-emacs*
