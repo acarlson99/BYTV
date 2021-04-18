@@ -40,8 +40,9 @@
     - [X] Only update chat elems in chatframe, not offscreen elems
     - [ ] Update chatframe emotes only when chatframe modified
     - [ ] Fix how chatframe HTML is updated. Could be much better
-  - [X] Deploy [4/4]
+  - [X] Deploy [5/5]
     - [X] Create Chrome store acct (call it OrcaDev or some shit)
+	- [X] Package for Chrome
     - [X] Update manifest.json
     - [X] Make build script build for Chrome && Firefox
 	- [X] Package for Firefox
