@@ -39,11 +39,9 @@ Adds global BTTV/FFZ emotes to YT live chat
 
 For channel emotes the broadcaster must have Twitch acct linked in `channel/about` Links.  Note: link name must match regex `/twitch/i`
 
-## Firefox Dev Info
+## Store Info
 
-### Describe
-
-#### Description
+### Description
 
 ```
 BetterYTV adds features to YouTube (inspired by BetterTTV for Twitch)
@@ -55,23 +53,7 @@ All global FFZ+BTTV emotes currently supported.  To enable channel emotes link T
 Plan on adding more features
 ```
 
-#### Categories
-
-```
-Games & Entertainment
-```
-
-### Additional Details
-
-#### Tags
-
-```
-better youtube, betterttv, betterytv, bttv, bytv, live, livechat, livestream, twitch, youtube
-```
-
-### Technical Details
-
-#### Dev comments
+### Dev comments
 
 ```html
 KNOWN BUGS/ISSUES:

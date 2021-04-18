@@ -3,7 +3,7 @@
   - C-c C-c checks/unchecks boxes. [[https://orgmode.org/manual/Checkboxes.html][Details]]
   - [[https://portswigger.net/burp/communitydownload][burp suite]] is very useful. [[https://portswigger.net/burp/documentation/desktop/getting-started][Getting started]]
   - [[https://medium.com/dev-genius/how-to-make-a-chrome-extension-f37bdfb6edb3][this]] blog post is probably useful
-* TODO [1/5]
+* TODO [2/5]
   - [-] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [2/3]
     - [X] Use Burp Suite to find BTTV endpoints. [[*Documentation][here]]
     - [X] Figure out how to query BTTV for emotes. [[*https://cdn.betterttv.net][here]]
@@ -40,11 +40,11 @@
     - [X] Only update chat elems in chatframe, not offscreen elems
     - [ ] Update chatframe emotes only when chatframe modified
     - [ ] Fix how chatframe HTML is updated. Could be much better
-  - [-] Deploy [1/4]
-    - [ ] Create Chrome store acct (call it OrcaDev or some shit)
-    - [ ] Update out manifest.json
+  - [X] Deploy [4/4]
+    - [X] Create Chrome store acct (call it OrcaDev or some shit)
+    - [X] Update manifest.json
     - [X] Make build script build for Chrome && Firefox
-	- [ ] Package for Firefox
+	- [X] Package for Firefox
 	  - [[https://extensionworkshop.com/documentation/publish/signing-and-distribution-overview/][signing && distributing]]
 	  - [[https://extensionworkshop.com/documentation/publish/package-your-extension/][how to package]]
 	  - [[https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension][anatomy of extension]]
