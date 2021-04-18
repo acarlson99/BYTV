@@ -46,7 +46,7 @@ For channel emotes the broadcaster must have Twitch acct linked in `channel/abou
 #### Description
 
 ```
-BYTV adds features to YouTube (inspired by BetterTTV for Twitch)
+BetterYTV adds features to YouTube (inspired by BetterTTV for Twitch)
 
 Adds new emotes to live chat
 
@@ -66,7 +66,7 @@ Games & Entertainment
 #### Tags
 
 ```
-bttv, bytv, live, livechat, livestream, twitch, youtube
+better youtube, betterttv, betterytv, bttv, bytv, live, livechat, livestream, twitch, youtube
 ```
 
 ### Technical Details
