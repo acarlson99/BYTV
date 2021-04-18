@@ -1,5 +1,3 @@
-const { log } = require("./util");
-
 const setSrc = (o, src, scope, shared) => {
   o.src = {
     src: src,
@@ -149,7 +147,7 @@ const emoteImg = emoteObj => {
        + ' style-scope yt-live-chat-text-message-renderer"'
        + ` src="${emoteObj.images["1x"]}"`
        + ` alt="${emoteObj.code}"`
-       + ` shared-tooltip-text="${emoteObj.code}">`
+       + ` shared-tooltip-text="${emoteObj.code}">`;
 };
 
 // TODO: add `emoteTooltip() and display on hover
