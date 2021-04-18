@@ -20,7 +20,7 @@ all: chrome-xpi chrome-zip firefox-xpi firefox-zip
 
 clean:
 	$(RM) -r $(CHROME_DIR) $(FIREFOX_DIR)
-	$(RM) $(CHROME_XPI) $(FIREFOX_XPI)
+	$(RM) $(CHROME_XPI) $(CHROME_ZIP) $(FIREFOX_XPI) $(FIREFOX_ZIP)
 
 re: clean all
 

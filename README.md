@@ -16,9 +16,9 @@ See `package.json` for version info
 # install npm deps
 npm install
 # build
-make chrome     # create chrome.xpi
+make chrome     # create chrome-xpi
 # or
-make firefox    # create firefox.xpi
+make firefox    # create firefox-xpi
 # or
 make all        # create chrome.xpi && firefox.xpi
 ```
@@ -27,9 +27,29 @@ make all        # create chrome.xpi && firefox.xpi
 
 ### Chrome
 
+#### Source
+
+Compile for Chrome
+
+`make chrome`
+
+Load files into browser
+
 `chrome://extensions` -> enable dev mode (if disabled) -> load unpacked -> /extension/path/build-chrome/
 
 ### Firefox
+
+#### Store
+
+https://addons.mozilla.org/en-US/firefox/addon/betterytv/
+
+#### Source
+
+Compile for Firefox
+
+`make firefox`
+
+Load files into browser
 
 `about:debugging#/runtime/this-firefox` -> Load Temporary Add-on -> /extension/path/build-firefox/manifest.json
 
