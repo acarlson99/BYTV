@@ -3,15 +3,15 @@
   - C-c C-c checks/unchecks boxes. [[https://orgmode.org/manual/Checkboxes.html][Details]]
   - [[https://portswigger.net/burp/communitydownload][burp suite]] is very useful. [[https://portswigger.net/burp/documentation/desktop/getting-started][Getting started]]
   - [[https://medium.com/dev-genius/how-to-make-a-chrome-extension-f37bdfb6edb3][this]] blog post is probably useful
-* TODO [2/5]
-  - [-] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [2/3]
+* TODO [3/5]
+  - [X] Reverse engineer BTTV API; infer usage from [[https://github.com/night/BetterTTV][BTTV frontend]] [3/3]
     - [X] Use Burp Suite to find BTTV endpoints. [[*Documentation][here]]
     - [X] Figure out how to query BTTV for emotes. [[*https://cdn.betterttv.net][here]]
-    - [ ] Figure out what socket endpoint is used for
+    - [X] Figure out what socket endpoint is used for
   - [X] Figure out YouTube backend and messages sent from server to frontend
     - chat messages are a response to POST request to `/youtubei/v1/live_chat/get_live_chat?key=idksomekeyhere`
       - example [[file:yt-chat-request][request]] and [[file:yt-chat-response.json][response]]
-  - [-] Features (from BTTV extension pages) [2/7]
+  - [-] Features (from BTTV extension pages) [2/8]
     - [X] Extra emoticons - BetterTTV global and per-channel emotes [4/4]
       - [X] [[https://github.com/night/betterttv/blob/master/src/modules/emotes/emote.js#L18-L43][ToHTML function]] (display like chat emote)
       - [X] Update chat messages periodically
@@ -35,6 +35,8 @@
       If live chat message is deleted then grey out msg (or smth) instead of deleting it from chat history
       - [ ] Intercept `delmsg` from server. See [[*https://www.youtube.com][here]]
       - [ ] Modify chat message (grey out or smth) instead of deleting it entirely
+	- [ ] Playlist checklist to move/delete multiple videos at once
+	  - Also maybe create different saved orders of playlist
   - [-] Optimize [2/4]
     - [X] Use JQuery instead of yucky `getElementsByClassName` functions
     - [X] Only update chat elems in chatframe, not offscreen elems
