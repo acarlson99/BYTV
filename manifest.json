@@ -1,7 +1,7 @@
 {
 	"name": "BetterYTV",
 	"manifest_version": 3,
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Enhances YouTube with new features and emotes",
 	"content_scripts": [
 		{
