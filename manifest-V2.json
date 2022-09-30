@@ -1,6 +1,6 @@
 {
 	"name": "BetterYTV",
-	"manifest_version": 3,
+	"manifest_version": 2,
 	"version": "1.0.2",
 	"description": "Enhances YouTube with new features and emotes",
 	"content_scripts": [
@@ -14,10 +14,10 @@
 			]
 		}
 	],
-	"action": {
+	"page_action": {
 		"default_icon": "icon.png"
 	},
-	"host_permissions": [
+	"permissions": [
 		"https://api.twitch.tv/kraken/users",
 		"https://api.betterttv.net/*",
 		"https://www.youtube.com/*"
