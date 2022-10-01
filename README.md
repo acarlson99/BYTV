@@ -2,6 +2,8 @@
 
 Better YouTube, inspired by [BetterTTV](https://betterttv.com/)
 
+To contribute see [notes](./notes/notes.org)
+
 ## Dependencies
 
 - npm (version 7.8.0)
